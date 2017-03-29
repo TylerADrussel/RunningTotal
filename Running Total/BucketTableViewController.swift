@@ -9,14 +9,26 @@
 import UIKit
 
 class BucketTableViewController: UITableViewController {
-
+    
+    @IBOutlet weak var bucketTitleTextField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
+    }
+    
+    @IBAction func createNewBucketTapped(_ sender: Any) {
+    
+        guard let bucketName = bucketTitleTextField.text, !bucketName.isEmpty else { return }
+        BucketController.shared.create(bucket: bucketName)
+        bucketTitleTextField.text = ""
+        tableView.reloadData()
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
         return BucketController.shared.buckets.count
     }
 
@@ -36,6 +48,7 @@ class BucketTableViewController: UITableViewController {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "showEntries" {

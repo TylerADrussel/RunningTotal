@@ -9,7 +9,27 @@
 import UIKit
 
 class EntryTableViewController: UITableViewController {
-
+    
+    
+    @IBAction func createNewItemTapped(_ sender: Any) {
+        guard let bucket = bucket,
+            let entryTitle = itemNameField.text,
+            let entryAmountString = itemAmountField.text else { return }
+        
+        let itemAmountFloat = Float(entryAmountString) ?? 0
+        
+        entrycontroller.create(entry: entryTitle, amount: itemAmountFloat, timestamp: Date(), bucket: bucket)
+        itemNameField.text = ""
+        itemAmountField.text = ""
+        tableView.reloadData()
+    }
+    
+    @IBOutlet weak var itemNameField: UITextField!
+    @IBOutlet weak var itemAmountField: UITextField!
+    @IBOutlet weak var runningTotalAmountLabel: UILabel!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

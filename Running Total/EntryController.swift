@@ -17,4 +17,3 @@ class entrycontroller {
     }
 }
 
-////// Stuff and things
