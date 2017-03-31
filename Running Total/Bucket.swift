@@ -23,11 +23,11 @@ class Bucket: Equatable {
     var bucketTimestamp: Date
     var entries: [Entry]
     
-    static func bucketTotal(bucket: Bucket) {
-        
-        let flatArray = bucket.entries.flatMap{$0}
+    var total: Float {
+        let flatArray = entries.flatMap{$0}
         let total = flatArray.reduce(0) {$0 + $1.amount}
         print(total)
+        return total
     }
 }
 

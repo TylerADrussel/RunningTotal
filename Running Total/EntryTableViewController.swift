@@ -21,6 +21,7 @@ class EntryTableViewController: UITableViewController {
         entrycontroller.create(entry: entryTitle, amount: itemAmountFloat, timestamp: Date(), bucket: bucket)
         itemNameField.text = ""
         itemAmountField.text = ""
+        runningTotalAmountLabel.text =  "Running Total: \(bucket.total)"
         tableView.reloadData()
     }
     
@@ -30,6 +31,12 @@ class EntryTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = bucket?.bucketTitle
+        if bucket?.entries.count == 0 {
+            runningTotalAmountLabel.text = "Please enter an item."
+        } else if let bucketTotal = bucket?.total {
+            runningTotalAmountLabel.text = "Running Total: \(bucketTotal)"
+        }
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

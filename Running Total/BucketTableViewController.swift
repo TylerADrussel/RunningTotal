@@ -36,6 +36,7 @@ class BucketTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BucketCell", for: indexPath)
         let bucket = BucketController.shared.buckets[indexPath.row]
         cell.textLabel?.text = bucket.bucketTitle
+        cell.detailTextLabel?.text = "\(bucket.total)"
         return cell
     }
 

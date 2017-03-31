@@ -28,9 +28,9 @@ class BucketController {
         buckets.remove(at: index)
     }
     
-    func create(entry entry: Entry, bucket: Bucket) {
-        bucket.entries.append(entry)
-    }
+//    func create(entry entry: Entry, bucket: Bucket) {
+//        bucket.entries.append(entry)
+//    }
     
     func update(entryToBucket entry: Entry, bucket: Bucket) {
         bucket.entries.append(entry)
