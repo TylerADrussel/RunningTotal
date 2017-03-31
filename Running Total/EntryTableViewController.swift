@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EntryTableViewController: UITableViewController {
+class EntryTableViewController: UITableViewController, UITextFieldDelegate {
     
     
     @IBAction func createNewItemTapped(_ sender: Any) {
@@ -36,6 +36,18 @@ class EntryTableViewController: UITableViewController {
         self.reloadRunningTotalLabel()
     }
 
+    func textField(_ textField: UITextField,
+                   shouldChangeCharactersIn range: NSRange,
+                   replacementString string: String) -> Bool {
+        if textField == itemAmountField {
+            let inverseSet = NSCharacterSet(charactersIn: ".0123456789").inverted
+            let components = string.components(separatedBy: inverseSet)
+            let filtered = components.joined(separator: "")
+            return string == filtered
+        }
+        return true
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let count = bucket?.entries.count, count != 0 else { return 0 }
         return count

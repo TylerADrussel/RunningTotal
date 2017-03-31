@@ -110,6 +110,9 @@
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="lZf-Dd-wDV" id="oX6-bA-4vR"/>
+                                            </connections>
                                         </textField>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xmp-Qw-Zvr">
                                             <rect key="frame" x="8" y="73.5" width="359" height="31.5"/>
