@@ -14,6 +14,7 @@ class BucketTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -36,14 +37,18 @@ class BucketTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BucketCell", for: indexPath)
         let bucket = BucketController.shared.buckets[indexPath.row]
         cell.textLabel?.text = bucket.bucketTitle
-        cell.detailTextLabel?.text = "\(bucket.total)"
+        if bucket.entries.count == 0 {
+            cell.detailTextLabel?.text = "No entries yet"
+        } else {
+            cell.detailTextLabel?.text = "\(bucket.entries.count) entries: \(bucket.total)"
+        }
         return cell
     }
 
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
+            BucketController.shared.buckets.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
@@ -60,5 +65,16 @@ class BucketTableViewController: UITableViewController {
                 detailViewController.bucket = bucket
             }
         }
+    }
+}
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
     }
 }

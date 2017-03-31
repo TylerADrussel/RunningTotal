@@ -31,12 +31,9 @@ class EntryTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
         title = bucket?.bucketTitle
-        if bucket?.entries.count == 0 {
-            runningTotalAmountLabel.text = "Please enter an item."
-        } else if let bucketTotal = bucket?.total {
-            runningTotalAmountLabel.text = "Running Total: \(bucketTotal)"
-        }
+        self.reloadRunningTotalLabel()
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -59,11 +56,12 @@ class EntryTableViewController: UITableViewController {
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
+            bucket?.entries.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
+        self.reloadRunningTotalLabel()
     }
     
     var bucket: Bucket? {
@@ -71,4 +69,14 @@ class EntryTableViewController: UITableViewController {
             if isViewLoaded { tableView.reloadData() }
         }
     }
+    
+    func reloadRunningTotalLabel() {
+        if bucket?.entries.count == 0 {
+            runningTotalAmountLabel.text = "Please enter an item."
+        } else if let bucketTotal = bucket?.total {
+            runningTotalAmountLabel.text = "Running Total: \(bucketTotal)"
+        }
+    }
 }
+
+
