@@ -28,15 +28,11 @@ class EntryTableViewController: UITableViewController {
     @IBOutlet weak var itemAmountField: UITextField!
     @IBOutlet weak var runningTotalAmountLabel: UILabel!
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         guard let count = bucket?.entries.count, count != 0 else { return 0 }
         return count
     }
@@ -45,6 +41,11 @@ class EntryTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "EntryCell", for: indexPath)
         let entry = bucket?.entries[indexPath.row]
         cell.textLabel?.text = entry?.title
+        var entryAmountString = ""
+        if let entryAmountFloat = entry?.amount {
+            entryAmountString = "\(entryAmountFloat)"
+        }
+        cell.detailTextLabel?.text = entryAmountString
         return cell
     }
 
