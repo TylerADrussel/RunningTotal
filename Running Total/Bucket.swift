@@ -7,31 +7,20 @@
 //
 
 import Foundation
+import CoreData
 
-class Bucket: Equatable {
+extension Bucket {
     
     static let bucketTitleKey = "bucketTitle"
     static let bucketTimestampKey = "bucketTimestamp"
     
-    init(bucketTitle: String, bucketTimestamp: Date = Date(), entries: [Entry] = []) {
+    convenience init(bucketTitle: String, bucketTimestamp: Date = Date(), context: NSManagedObjectContext = CoreDataStack.context) {
+        
+        self.init(context: context)
+        
         self.bucketTitle = bucketTitle
-        self.bucketTimestamp = bucketTimestamp
-        self.entries = entries
-    }
-    
-    var bucketTitle: String
-    var bucketTimestamp: Date
-    var entries: [Entry]
-    
-    var total: Float {
-        let flatArray = entries.flatMap{$0}
-        let total = flatArray.reduce(0) {$0 + $1.amount}
-        print(total)
-        return total
+        self.bucketTimestamp = bucketTimestamp as NSDate
     }
 }
 
-func ==(lhs: Bucket, rhs: Bucket) -> Bool {
-    return lhs.bucketTitle == rhs.bucketTitle && lhs.bucketTimestamp == rhs.bucketTimestamp
-}
 

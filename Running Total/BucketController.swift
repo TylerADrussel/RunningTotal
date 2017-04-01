@@ -7,37 +7,57 @@
 //
 
 import Foundation
+import CoreData
 
 class BucketController {
     
     static let shared = BucketController()
     
-    var buckets = [Bucket]()
+    var buckets: [Bucket] {
+        let request: NSFetchRequest<Bucket> = Bucket.fetchRequest()
+        
+        do {
+            return try CoreDataStack.context.fetch(request)
+        } catch {
+            print(error.localizedDescription)
+            return []
+        }
+    }
 
     func create(bucket bucketTitle: String, timestamp: Date = Date()) {
-        let bucket = Bucket(bucketTitle: bucketTitle)
-        buckets.append(bucket)
-    }
-    
-    func update(bucket: Bucket, bucketTitle: String) {
-        bucket.bucketTitle = bucketTitle
+        let _ = Bucket(bucketTitle: bucketTitle)
+        saveToPersistentStorage()
     }
     
     func delete(bucket: Bucket) {
-        guard let index = buckets.index(of: bucket) else { return }
-        buckets.remove(at: index)
+        bucket.managedObjectContext?.delete(bucket)
+        saveToPersistentStorage()
     }
     
-//    func create(entry entry: Entry, bucket: Bucket) {
-//        bucket.entries.append(entry)
-//    }
-    
-    func update(entryToBucket entry: Entry, bucket: Bucket) {
-        bucket.entries.append(entry)
+    func total(bucket: Bucket) -> Float {
+        
+        var total: Float = 0
+        
+        for entry in bucket.entries! {
+            if let entry = entry as? Entry {
+                total += entry.amount
+            }
+        }
+        return total
+
+//        let flatArray = entries.flatMap{$0}
+//        let total = flatArray.reduce(0) {$0 + $1.amount}
+//        print(total)
+//        return total
     }
     
-    func delete(entryFromBucket entry: Entry, bucket: Bucket) {
-        guard let index = bucket.entries.index(of: entry) else { return }
-        bucket.entries.remove(at: index)
+    // MARK: Private
+    
+    private func saveToPersistentStorage() {
+        do {
+            try CoreDataStack.context.save()
+        } catch {
+            print("Error saving Managed Object Context. Items Not Saved.")
+        }
     }
 }

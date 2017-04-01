@@ -7,24 +7,21 @@
 //
 
 import Foundation
+import CoreData
 
-class Entry: Equatable {
+extension Entry {
     
     static let titleKey = "title"
     static let amountKey = "amount"
     static let timestampKey = "timestamp"
     
-    init(title: String, amount: Float, timestamp: Date = Date()) {
+    convenience init(title: String, amount: Float, timestamp: Date = Date(), bucket: Bucket, context: NSManagedObjectContext = CoreDataStack.context) {
+        
+        self.init(context: context)
+        
         self.title = title
         self.amount = amount
-        self.timestamp = timestamp
+        self.timestamp = timestamp as NSDate?
+        self.bucket = bucket
     }
-    
-    var title: String
-    var amount: Float
-    var timestamp: Date
-}
-
-func ==(lhs: Entry, rhs: Entry) -> Bool {
-    return lhs.title == rhs.title && lhs.amount == rhs.amount && lhs.timestamp == rhs.timestamp
 }

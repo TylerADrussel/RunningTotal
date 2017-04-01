@@ -18,10 +18,10 @@ class EntryTableViewController: UITableViewController, UITextFieldDelegate {
         
         let itemAmountFloat = Float(entryAmountString) ?? 0
         
-        entrycontroller.create(entry: entryTitle, amount: itemAmountFloat, timestamp: Date(), bucket: bucket)
+        EntryController.shared.create(entry: entryTitle, amount: itemAmountFloat, bucket: bucket)
         itemNameField.text = ""
         itemAmountField.text = ""
-        runningTotalAmountLabel.text =  "Running Total: \(bucket.total)"
+        runningTotalAmountLabel.text =  "Running Total: \(BucketController.total)"
         tableView.reloadData()
     }
     
@@ -49,13 +49,13 @@ class EntryTableViewController: UITableViewController, UITextFieldDelegate {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let count = bucket?.entries.count, count != 0 else { return 0 }
+        guard let count = bucket?.entries?.count, count != 0 else { return 0 }
         return count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "EntryCell", for: indexPath)
-        let entry = bucket?.entries[indexPath.row]
+        let entry = bucket?.entries?[indexPath.row] as? Entry
         cell.textLabel?.text = entry?.title
         var entryAmountString = ""
         if let entryAmountFloat = entry?.amount {
@@ -68,7 +68,8 @@ class EntryTableViewController: UITableViewController, UITextFieldDelegate {
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            bucket?.entries.remove(at: indexPath.row)
+            // TODO: unwrap entries and cast as Entry
+            EntryController.shared.remove(entry: bucket?.entries![indexPath.row] as! Entry)
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
@@ -83,10 +84,13 @@ class EntryTableViewController: UITableViewController, UITextFieldDelegate {
     }
     
     func reloadRunningTotalLabel() {
-        if bucket?.entries.count == 0 {
+        if bucket?.entries?.count == 0 {
             runningTotalAmountLabel.text = "Please enter an item."
-        } else if let bucketTotal = bucket?.total {
-            runningTotalAmountLabel.text = "Running Total: \(bucketTotal)"
+        } else {
+            if let bucket = bucket {
+                let total = BucketController.shared.total(bucket: bucket)
+                runningTotalAmountLabel.text = "Running Total: \(total)"
+            }
         }
     }
 }

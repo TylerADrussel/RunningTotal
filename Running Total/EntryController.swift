@@ -7,13 +7,33 @@
 //
 
 import Foundation
+import CoreData
 
-class entrycontroller {
+class EntryController {
     
-    static func create(entry title: String, amount: Float, timestamp: Date = Date(), bucket: Bucket) {
+    func create(entry title: String, amount: Float, bucket: Bucket) {
     
-    let entry = Entry(title: title, amount: amount)
-    BucketController.shared.update(entryToBucket: entry, bucket: bucket)
+        let _ = Entry(title: title, amount: amount, bucket: bucket)
+        saveToPersistentStorage()
+    }
+
+    private static let EntriesKey = "entries"
+    
+    static let shared = EntryController()
+    
+    func remove(entry: Entry) {
+        
+        entry.managedObjectContext?.delete(entry)
+        saveToPersistentStorage()
+    }
+    
+    // MARK: Private
+    
+    private func saveToPersistentStorage() {
+        do {
+            try CoreDataStack.context.save()
+        } catch {
+            print("Error saving Managed Object Context. Items Not Saved.")
+        }
     }
 }
-

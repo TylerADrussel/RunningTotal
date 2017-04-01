@@ -41,18 +41,22 @@ class BucketTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BucketCell", for: indexPath)
         let bucket = BucketController.shared.buckets[indexPath.row]
         cell.textLabel?.text = bucket.bucketTitle
-        if bucket.entries.count == 0 {
+        if bucket.entries?.count == 0 {
             cell.detailTextLabel?.text = "No entries yet"
         } else {
-            cell.detailTextLabel?.text = "\(bucket.entries.count) entries: \(bucket.total)"
+            
+            let total = BucketController.shared.total(bucket: bucket)
+            cell.detailTextLabel?.text = "\(bucket.entries?.count) entries: \(total)"
+            
+            
         }
         return cell
     }
-
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            BucketController.shared.buckets.remove(at: indexPath.row)
+            BucketController.shared.delete(bucket: BucketController.shared.buckets[indexPath.row])
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
