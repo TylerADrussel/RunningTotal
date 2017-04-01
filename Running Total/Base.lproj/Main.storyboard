@@ -36,30 +36,42 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BucketCell" textLabel="Fq5-VT-hXu" detailTextLabel="8c9-qL-js9" style="IBUITableViewCellStyleValue1" id="RSy-f9-BXS">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BucketCell" id="RSy-f9-BXS" customClass="FoldingCell" customModule="Running_Total" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RSy-f9-BXS" id="jV9-wD-quC">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Fq5-VT-hXu">
-                                            <rect key="frame" x="15" y="11" width="34" height="21"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8c9-qL-js9">
-                                            <rect key="frame" x="316" y="11" width="44" height="21"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bOA-wy-kTt" customClass="RotatedView" customModule="Running_Total" customModuleProvider="target">
+                                            <rect key="frame" x="8" y="8" width="359" height="75"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="75" id="d6D-Rl-3Sr"/>
+                                            </constraints>
+                                        </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7d9-gM-bpC">
+                                            <rect key="frame" x="8" y="97" width="359" height="456"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="456" id="0z4-u1-6RJ"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="7d9-gM-bpC" secondAttribute="trailing" constant="8" id="7NR-MC-F0V"/>
+                                        <constraint firstAttribute="trailing" secondItem="bOA-wy-kTt" secondAttribute="trailing" constant="8" id="N31-JM-Fql"/>
+                                        <constraint firstItem="7d9-gM-bpC" firstAttribute="leading" secondItem="jV9-wD-quC" secondAttribute="leading" constant="8" id="Nen-Bb-qeY"/>
+                                        <constraint firstItem="7d9-gM-bpC" firstAttribute="top" secondItem="jV9-wD-quC" secondAttribute="top" constant="97" id="iXw-wD-9X3"/>
+                                        <constraint firstItem="bOA-wy-kTt" firstAttribute="top" secondItem="jV9-wD-quC" secondAttribute="top" constant="8" id="t8E-Yj-8qS"/>
+                                        <constraint firstItem="bOA-wy-kTt" firstAttribute="leading" secondItem="jV9-wD-quC" secondAttribute="leading" constant="8" id="ykQ-xw-PUF"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="containerView" destination="7d9-gM-bpC" id="xiU-aL-ABf"/>
+                                    <outlet property="containerViewTop" destination="iXw-wD-9X3" id="8qW-0P-otY"/>
+                                    <outlet property="foregroundView" destination="bOA-wy-kTt" id="7e5-OC-ab8"/>
+                                    <outlet property="foregroundViewTop" destination="t8E-Yj-8qS" id="bx6-1k-YJ8"/>
                                     <segue destination="lZf-Dd-wDV" kind="show" identifier="showEntries" id="Mz0-Sy-uiO"/>
                                 </connections>
                             </tableViewCell>

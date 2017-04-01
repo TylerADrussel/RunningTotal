@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B41F03E51E903A8B00961BE8 /* FoldingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41F03E41E903A8B00961BE8 /* FoldingCell.swift */; };
 		B4366D6B1E86C20E0014FA94 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4366D6A1E86C20E0014FA94 /* AppDelegate.swift */; };
 		B4366D721E86C20E0014FA94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4366D711E86C20E0014FA94 /* Assets.xcassets */; };
 		B4366D751E86C20E0014FA94 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4366D731E86C20E0014FA94 /* LaunchScreen.storyboard */; };
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B41F03E41E903A8B00961BE8 /* FoldingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoldingCell.swift; sourceTree = "<group>"; };
 		B4366D671E86C20E0014FA94 /* Running Total.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Running Total.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4366D6A1E86C20E0014FA94 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B4366D711E86C20E0014FA94 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				B47ADAD81E8B457D008ABAB2 /* Main.storyboard */,
+				B41F03E41E903A8B00961BE8 /* FoldingCell.swift */,
 				B4366D6A1E86C20E0014FA94 /* AppDelegate.swift */,
 				B4366D711E86C20E0014FA94 /* Assets.xcassets */,
 				B4366D731E86C20E0014FA94 /* LaunchScreen.storyboard */,
@@ -316,6 +319,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B4366D9B1E86C22E0014FA94 /* Entry.swift in Sources */,
+				B41F03E51E903A8B00961BE8 /* FoldingCell.swift in Sources */,
 				B4366DA41E86D1830014FA94 /* BucketController.swift in Sources */,
 				B4366DA61E86EBE60014FA94 /* EntryController.swift in Sources */,
 				B4366DA01E86CAF80014FA94 /* BucketTableViewController.swift in Sources */,
