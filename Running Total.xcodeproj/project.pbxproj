@@ -110,11 +110,7 @@
 				B4366D9C1E86C4420014FA94 /* Model */,
 				B4366D9D1E86CAC10014FA94 /* Model Controller */,
 				B4366D9E1E86CAD50014FA94 /* View Controller */,
-				B4366D6A1E86C20E0014FA94 /* AppDelegate.swift */,
-				B4366D711E86C20E0014FA94 /* Assets.xcassets */,
-				B47ADAD81E8B457D008ABAB2 /* Main.storyboard */,
-				B4366D731E86C20E0014FA94 /* LaunchScreen.storyboard */,
-				B4366D761E86C20E0014FA94 /* Info.plist */,
+				B47ADADB1E8FFFD7008ABAB2 /* Resources */,
 			);
 			path = "Running Total";
 			sourceTree = "<group>";
@@ -162,6 +158,18 @@
 				B4366DA11E86CB0B0014FA94 /* EntryTableViewController.swift */,
 			);
 			name = "View Controller";
+			sourceTree = "<group>";
+		};
+		B47ADADB1E8FFFD7008ABAB2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B47ADAD81E8B457D008ABAB2 /* Main.storyboard */,
+				B4366D6A1E86C20E0014FA94 /* AppDelegate.swift */,
+				B4366D711E86C20E0014FA94 /* Assets.xcassets */,
+				B4366D731E86C20E0014FA94 /* LaunchScreen.storyboard */,
+				B4366D761E86C20E0014FA94 /* Info.plist */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

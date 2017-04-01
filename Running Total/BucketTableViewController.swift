@@ -27,8 +27,10 @@ class BucketTableViewController: UITableViewController {
         BucketController.shared.create(bucket: bucketName)
         bucketTitleTextField.text = ""
         tableView.reloadData()
+        
 //        tableView.selectRow(at: <#T##IndexPath?#>, animated: <#T##Bool#>, scrollPosition: <#T##UITableViewScrollPosition#>)
 //        performSegue(withIdentifier: <#T##String#>, sender: <#T##Any?#>)
+    
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
