@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B41F03E51E903A8B00961BE8 /* FoldingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41F03E41E903A8B00961BE8 /* FoldingCell.swift */; };
+		B41F03E71E904D0600961BE8 /* BucketCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41F03E61E904D0600961BE8 /* BucketCell.swift */; };
 		B4366D6B1E86C20E0014FA94 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4366D6A1E86C20E0014FA94 /* AppDelegate.swift */; };
 		B4366D721E86C20E0014FA94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4366D711E86C20E0014FA94 /* Assets.xcassets */; };
 		B4366D751E86C20E0014FA94 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4366D731E86C20E0014FA94 /* LaunchScreen.storyboard */; };
@@ -43,6 +44,7 @@
 
 /* Begin PBXFileReference section */
 		B41F03E41E903A8B00961BE8 /* FoldingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoldingCell.swift; sourceTree = "<group>"; };
+		B41F03E61E904D0600961BE8 /* BucketCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketCell.swift; sourceTree = "<group>"; };
 		B4366D671E86C20E0014FA94 /* Running Total.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Running Total.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4366D6A1E86C20E0014FA94 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B4366D711E86C20E0014FA94 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 				B4366D981E86C2250014FA94 /* Bucket.swift */,
 				B4366D9A1E86C22E0014FA94 /* Entry.swift */,
 				B47ADADC1E900110008ABAB2 /* Stack.swift */,
+				B41F03E61E904D0600961BE8 /* BucketCell.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -327,6 +330,7 @@
 				B47ADB321E90120B008ABAB2 /* Model.xcdatamodeld in Sources */,
 				B4366D991E86C2250014FA94 /* Bucket.swift in Sources */,
 				B4366DA21E86CB0B0014FA94 /* EntryTableViewController.swift in Sources */,
+				B41F03E71E904D0600961BE8 /* BucketCell.swift in Sources */,
 				B4366D6B1E86C20E0014FA94 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
