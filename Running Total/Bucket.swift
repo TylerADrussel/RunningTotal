@@ -20,6 +20,7 @@ extension Bucket {
         
         self.bucketTitle = bucketTitle
         self.bucketTimestamp = bucketTimestamp as NSDate
+
     }
 }
 

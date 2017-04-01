@@ -30,7 +30,6 @@ class BucketTableViewController: UITableViewController {
         
 //        tableView.selectRow(at: <#T##IndexPath?#>, animated: <#T##Bool#>, scrollPosition: <#T##UITableViewScrollPosition#>)
 //        performSegue(withIdentifier: <#T##String#>, sender: <#T##Any?#>)
-    
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -44,11 +43,9 @@ class BucketTableViewController: UITableViewController {
         if bucket.entries?.count == 0 {
             cell.detailTextLabel?.text = "No entries yet"
         } else {
-            
+            let entryCount = bucket.entries!.count
             let total = BucketController.shared.total(bucket: bucket)
-            cell.detailTextLabel?.text = "\(bucket.entries?.count) entries: \(total)"
-            
-            
+            cell.detailTextLabel?.text = "\(entryCount) entries: \(total)"
         }
         return cell
     }
@@ -75,13 +72,13 @@ class BucketTableViewController: UITableViewController {
         }
     }
 }
+
 extension UIViewController {
     func hideKeyboardWhenTappedAround() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
     }
-    
     func dismissKeyboard() {
         view.endEditing(true)
     }

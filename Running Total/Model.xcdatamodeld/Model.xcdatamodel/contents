@@ -5,7 +5,7 @@
         <attribute name="bucketTitle" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="entries" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Entry" inverseName="bucket" inverseEntity="Entry" syncable="YES"/>
     </entity>
-    <entity name="Entry" representedClassName="Entry" parentEntity="Bucket" syncable="YES" codeGenerationType="class">
+    <entity name="Entry" representedClassName="Entry" syncable="YES" codeGenerationType="class">
         <attribute name="amount" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
@@ -13,6 +13,6 @@
     </entity>
     <elements>
         <element name="Bucket" positionX="-63" positionY="-18" width="128" height="90"/>
-        <element name="Entry" positionX="-54" positionY="-9" width="128" height="105"/>
+        <element name="Entry" positionX="196" positionY="-9" width="128" height="103"/>
     </elements>
 </model>

@@ -21,7 +21,7 @@ class EntryTableViewController: UITableViewController, UITextFieldDelegate {
         EntryController.shared.create(entry: entryTitle, amount: itemAmountFloat, bucket: bucket)
         itemNameField.text = ""
         itemAmountField.text = ""
-        runningTotalAmountLabel.text =  "Running Total: \(BucketController.total)"
+reloadRunningTotalLabel()
         tableView.reloadData()
     }
     
