@@ -222,6 +222,9 @@
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="brg-GC-hvr">
                                                                     <rect key="frame" x="281" y="0.0" width="62" height="30"/>
                                                                     <state key="normal" title="Add Item"/>
+                                                                    <connections>
+                                                                        <action selector="createNewEntryTapped:" destination="gD7-Aw-byA" eventType="touchUpInside" id="soV-4h-mCK"/>
+                                                                    </connections>
                                                                 </button>
                                                             </subviews>
                                                         </stackView>
@@ -312,11 +315,15 @@
                                     <outlet property="bucketItemCountLabelClosedCell" destination="qFk-If-jEW" id="Byt-Ym-3Ou"/>
                                     <outlet property="bucketOpenIndex" destination="Bju-bn-Pg5" id="DWn-Nm-jXh"/>
                                     <outlet property="bucketTitleLabelClosedCell" destination="07A-C0-eqD" id="dLN-cd-eXc"/>
+                                    <outlet property="bucketTitleLabelOpenCell" destination="BPi-hi-YFZ" id="S9S-M4-l6Z"/>
                                     <outlet property="bucketTotalLabelClosedCell" destination="nDy-K5-eaq" id="Jca-8v-1bg"/>
+                                    <outlet property="bucketTotalLabelOpenCell" destination="V1h-Gi-hn3" id="dLN-lk-UmT"/>
                                     <outlet property="containerView" destination="6cl-iD-dL7" id="7dF-xY-JHO"/>
                                     <outlet property="containerViewTop" destination="fFu-Fv-s8y" id="bcn-LU-R7a"/>
                                     <outlet property="foregroundView" destination="R1V-Uj-Q5f" id="miT-Ft-NJ0"/>
                                     <outlet property="foregroundViewTop" destination="p1K-rA-VOR" id="d9N-NE-adP"/>
+                                    <outlet property="newEntryAmountTextField" destination="mQy-w1-yGJ" id="duB-5U-6ge"/>
+                                    <outlet property="newEntryTitleTextField" destination="73o-NY-GkU" id="WLs-t7-8md"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

@@ -18,8 +18,15 @@ class BucketCell: FoldingCell {
     @IBOutlet weak var bucketDatetimeLabelClosedCell: UILabel!
     @IBOutlet weak var bucketItemCountLabelClosedCell: UILabel!
     
+    @IBOutlet weak var bucketTitleLabelOpenCell: UILabel!
+    @IBOutlet weak var bucketTotalLabelOpenCell: UILabel!
     
+    @IBOutlet weak var newEntryTitleTextField: UITextField!
+    @IBOutlet weak var newEntryAmountTextField: UITextField!
     
+    @IBAction func createNewEntryTapped(_ sender: Any) {
+        
+    }
     
     
     var bucketIndex: Int = 0 {
