@@ -59,48 +59,58 @@ class BucketListTableViewController: UITableViewController {
             return
         }
         
-        cell.backgroundColor = UIColor.clear
+        cell.backgroundColor = UIColor.darkGray
         
-        if cellHeights[(indexPath as NSIndexPath).row] == kCloseCellHeight {
+        if cellHeights[(indexPath as IndexPath).row] == kCloseCellHeight {
             cell.selectedAnimation(false, animated: false, completion: nil)
         } else {
             cell.selectedAnimation(true, animated: false, completion: nil)
         }
-//        cell.number = indexPath.row
+        cell.bucketIndex = indexPath.row
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FoldingCell", for: indexPath)
+        let bucketCell: BucketCell = self.tableView.dequeueReusableCell(withIdentifier: "FoldingCell", for: indexPath) as! BucketCell
+        
         let bucket = BucketController.shared.buckets[indexPath.row]
-//        cell.textLabel?.text = bucket.bucketTitle
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/YYYY"
+        let bucketDate = dateFormatter.string(from: bucket.bucketTimestamp as! Date)
+        bucketCell.bucketTitleLabelClosedCell.text = bucket.bucketTitle
+        bucketCell.bucketDatetimeLabelClosedCell.text = "\(bucketDate)"
+        bucketCell.bucketClosedIndex.text = "\(BucketController.shared.buckets.index(of: bucket))"
+        bucketCell.bucketOpenIndex.text = "\(BucketController.shared.buckets.index(of: bucket))"
         if bucket.entries?.count == 0 {
-//            cell.detailTextLabel?.text = "No entries yet"
+            bucketCell.bucketTotalLabelClosedCell.text = "0"
+            bucketCell.bucketItemCountLabelClosedCell.text = "None"
         } else {
             let entryCount = bucket.entries!.count
             let total = BucketController.shared.total(bucket: bucket)
-//            cell.detailTextLabel?.text = "\(entryCount) entries: \(total)"
+            bucketCell.bucketTotalLabelClosedCell.text = "\(total)"
+            bucketCell.bucketItemCountLabelClosedCell.text = "\(entryCount)"
         }
-        return cell
+        
+        return bucketCell
     }
     
-    func tableView(tableView: UITableView, heightForRowAt indexPath: NSIndexPath) -> CGFloat {
-        return cellHeights[(indexPath as NSIndexPath).row]
+    func tableView(tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return cellHeights[(indexPath as IndexPath).row]
     }
     
     // MARK: TableView Delegate
     
-    func tableView(tableView: UITableView, didselectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didselectRowAtIndexPath indexPath: IndexPath) {
         guard case let cell as FoldingCell = tableView.cellForRow(at: indexPath as IndexPath) else {
             return
         }
         
         var duration = 0.0
-        if cellHeights[(indexPath as NSIndexPath).row] == kCloseCellHeight { // open cell
-            cellHeights[(indexPath as NSIndexPath).row] = kOpenCellHeight
+        if cellHeights[(indexPath as IndexPath).row] == kCloseCellHeight { // open cell
+            cellHeights[(indexPath as IndexPath).row] = kOpenCellHeight
             cell.selectedAnimation(true, animated: true, completion: nil)
             duration = 0.5
         } else {// close cell
-            cellHeights[(indexPath as NSIndexPath).row] = kCloseCellHeight
+            cellHeights[(indexPath as IndexPath).row] = kCloseCellHeight
             cell.selectedAnimation(false, animated: true, completion: nil)
             duration = 0.8
         }
@@ -111,7 +121,7 @@ class BucketListTableViewController: UITableViewController {
         }, completion: nil)
     }
     
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: IndexPath) {
         
         if case let cell as FoldingCell = cell {
             if cellHeights[indexPath.row] == C.CellHeight.close {

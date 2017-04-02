@@ -10,6 +10,9 @@ import UIKit
 
 class BucketCell: FoldingCell {
     
+    @IBOutlet weak var bucketClosedIndex: UILabel!
+    @IBOutlet weak var bucketOpenIndex: UILabel!
+    
     @IBOutlet weak var bucketTitleLabelClosedCell: UILabel!
     @IBOutlet weak var bucketTotalLabelClosedCell: UILabel!
     @IBOutlet weak var bucketDatetimeLabelClosedCell: UILabel!
@@ -19,19 +22,13 @@ class BucketCell: FoldingCell {
     
     
     
-    
-    
-    
-    
-//    @IBOutlet weak var closeNumberLabel: UILabel!
-//    @IBOutlet weak var openNumberLabel: UILabel!
-//    
-//    var number: Int = 0 {
-//        didSet {
-//            closeNumberLabel.text = String(number)
-//            openNumberLabel.text = String(number)
-//        }
-//    }
+    var bucketIndex: Int = 0 {
+        didSet {
+            bucketClosedIndex.text = String(bucketIndex)
+            bucketOpenIndex.text = String(bucketIndex)
+        }
+    }
+
     override func awakeFromNib() {
         
         foregroundView.layer.cornerRadius = 10
@@ -42,7 +39,7 @@ class BucketCell: FoldingCell {
     
     override func animationDuration(_ itemIndex:NSInteger, type:AnimationType)-> TimeInterval {
         
-        let durations = [0.26, 0.2, 0.2]
+        let durations = [0.26, 0.2, 0.2] // Timing animation for each view
         return durations[itemIndex]
     }
 }
