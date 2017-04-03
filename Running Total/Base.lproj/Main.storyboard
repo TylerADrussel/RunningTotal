@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -167,7 +168,7 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6cl-iD-dL7">
-                                            <rect key="frame" x="8" y="91" width="359" height="500"/>
+                                            <rect key="frame" x="8" y="16" width="359" height="500"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Open Index" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bju-bn-Pg5">
                                                     <constraints>
@@ -184,7 +185,7 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u9b-6B-TUy">
                                                             <rect key="frame" x="0.0" y="0.0" width="359" height="50"/>
                                                             <subviews>
-                                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aRm-sM-Ct9">
+                                                                <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aRm-sM-Ct9">
                                                                     <rect key="frame" x="0.0" y="0.0" width="359" height="50"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Bucket Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BPi-hi-YFZ">
@@ -292,10 +293,10 @@
                                         </view>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="6cl-iD-dL7" firstAttribute="top" secondItem="q0n-QF-kG0" secondAttribute="topMargin" constant="8" id="IAD-P3-zY9"/>
                                         <constraint firstAttribute="trailing" secondItem="6cl-iD-dL7" secondAttribute="trailing" constant="8" id="QRh-OT-ZFj"/>
                                         <constraint firstItem="R1V-Uj-Q5f" firstAttribute="leading" secondItem="q0n-QF-kG0" secondAttribute="leading" constant="8" id="YP7-HP-cJD"/>
                                         <constraint firstItem="6cl-iD-dL7" firstAttribute="leading" secondItem="q0n-QF-kG0" secondAttribute="leading" constant="8" id="bAJ-J7-3r0"/>
-                                        <constraint firstItem="6cl-iD-dL7" firstAttribute="top" secondItem="R1V-Uj-Q5f" secondAttribute="bottom" constant="8" id="fFu-Fv-s8y"/>
                                         <constraint firstAttribute="trailing" secondItem="R1V-Uj-Q5f" secondAttribute="trailing" constant="8" id="lyg-6W-hv3"/>
                                         <constraint firstItem="R1V-Uj-Q5f" firstAttribute="top" secondItem="q0n-QF-kG0" secondAttribute="top" constant="8" id="p1K-rA-VOR"/>
                                     </constraints>
@@ -319,7 +320,7 @@
                                     <outlet property="bucketTotalLabelClosedCell" destination="nDy-K5-eaq" id="Jca-8v-1bg"/>
                                     <outlet property="bucketTotalLabelOpenCell" destination="V1h-Gi-hn3" id="dLN-lk-UmT"/>
                                     <outlet property="containerView" destination="6cl-iD-dL7" id="7dF-xY-JHO"/>
-                                    <outlet property="containerViewTop" destination="fFu-Fv-s8y" id="bcn-LU-R7a"/>
+                                    <outlet property="containerViewTop" destination="IAD-P3-zY9" id="Eyd-5C-r0j"/>
                                     <outlet property="foregroundView" destination="R1V-Uj-Q5f" id="miT-Ft-NJ0"/>
                                     <outlet property="foregroundViewTop" destination="p1K-rA-VOR" id="d9N-NE-adP"/>
                                     <outlet property="newEntryAmountTextField" destination="mQy-w1-yGJ" id="duB-5U-6ge"/>

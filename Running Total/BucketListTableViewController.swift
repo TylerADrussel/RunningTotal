@@ -54,22 +54,6 @@ class BucketListTableViewController: UITableViewController {
         return BucketController.shared.buckets.count
     }
     
-    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
-        guard case let cell as BucketCell = cell else {
-            return
-        }
-        
-        cell.backgroundColor = UIColor.darkGray
-        
-        if cellHeights[(indexPath as IndexPath).row] == kCloseCellHeight {
-            cell.selectedAnimation(false, animated: false, completion: nil)
-        } else {
-            cell.selectedAnimation(true, animated: false, completion: nil)
-        }
-        cell.bucketIndex = indexPath.row
-    }
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let bucketCell: BucketCell = self.tableView.dequeueReusableCell(withIdentifier: "FoldingCell", for: indexPath) as! BucketCell
         
@@ -95,23 +79,25 @@ class BucketListTableViewController: UITableViewController {
     }
     
     func tableView(tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return cellHeights[(indexPath as IndexPath).row]
+        return cellHeights[indexPath.row]
     }
     
     // MARK: TableView Delegate
     
-    func tableView(tableView: UITableView, didselectRowAtIndexPath indexPath: IndexPath) {
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         guard case let cell as FoldingCell = tableView.cellForRow(at: indexPath as IndexPath) else {
             return
         }
         
         var duration = 0.0
-        if cellHeights[(indexPath as IndexPath).row] == kCloseCellHeight { // open cell
-            cellHeights[(indexPath as IndexPath).row] = kOpenCellHeight
+        if cellHeights[indexPath.row] == kCloseCellHeight { // open cell
+            cellHeights[indexPath.row] = kOpenCellHeight
             cell.selectedAnimation(true, animated: true, completion: nil)
             duration = 0.5
         } else {// close cell
-            cellHeights[(indexPath as IndexPath).row] = kCloseCellHeight
+            cellHeights[indexPath.row] = kCloseCellHeight
             cell.selectedAnimation(false, animated: true, completion: nil)
             duration = 0.8
         }
@@ -122,7 +108,7 @@ class BucketListTableViewController: UITableViewController {
         }, completion: nil)
     }
     
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
         if case let cell as FoldingCell = cell {
             if cellHeights[indexPath.row] == C.CellHeight.close {
@@ -132,6 +118,25 @@ class BucketListTableViewController: UITableViewController {
             }
         }
     }
+    
+    
+//    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        
+//        guard case let cell as BucketCell = cell else {
+//            return
+//        }
+//        
+//        cell.backgroundColor = UIColor.darkGray
+//        
+//        if cellHeights[(indexPath as IndexPath).row] == kCloseCellHeight {
+//            cell.selectedAnimation(false, animated: false, completion: nil)
+//        } else {
+//            cell.selectedAnimation(true, animated: false, completion: nil)
+//        }
+//        cell.bucketIndex = indexPath.row
+//    }
+    
+    
     
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
