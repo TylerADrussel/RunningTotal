@@ -10,24 +10,25 @@ import UIKit
 
 class BucketCell: FoldingCell {
     
+    // MARK: Cell Indexes
     @IBOutlet weak var bucketClosedIndex: UILabel!
     @IBOutlet weak var bucketOpenIndex: UILabel!
     
+    // MARK: Closed Cell Outlets
     @IBOutlet weak var bucketTitleLabelClosedCell: UILabel!
     @IBOutlet weak var bucketTotalLabelClosedCell: UILabel!
     @IBOutlet weak var bucketDatetimeLabelClosedCell: UILabel!
     @IBOutlet weak var bucketItemCountLabelClosedCell: UILabel!
     
+    // Mark: Open Cell Outlets
     @IBOutlet weak var bucketTitleLabelOpenCell: UILabel!
     @IBOutlet weak var bucketTotalLabelOpenCell: UILabel!
-    
     @IBOutlet weak var newEntryTitleTextField: UITextField!
     @IBOutlet weak var newEntryAmountTextField: UITextField!
-    
+
     @IBAction func createNewEntryTapped(_ sender: Any) {
         
     }
-    
     
     var bucketIndex: Int = 0 {
         didSet {
@@ -40,7 +41,6 @@ class BucketCell: FoldingCell {
         
         foregroundView.layer.cornerRadius = 10
         foregroundView.layer.masksToBounds = true
-        
         super.awakeFromNib()
     }
     

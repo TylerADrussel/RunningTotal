@@ -45,10 +45,6 @@ class BucketController {
         }
         return total
 
-//        let flatArray = entries.flatMap{$0}
-//        let total = flatArray.reduce(0) {$0 + $1.amount}
-//        print(total)
-//        return total
     }
     
     // MARK: Private

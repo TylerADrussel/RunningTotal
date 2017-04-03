@@ -21,18 +21,10 @@ class BucketListTableViewController: UITableViewController {
         tableView.reloadData()
     }    
     
-    fileprivate struct C {
-        struct CellHeight {
-            static let close: CGFloat = 75
-            static let open: CGFloat = 500
-        }
-    }
-    
     let kCloseCellHeight: CGFloat = 75
     let kOpenCellHeight: CGFloat = 500
     let kRowsCount = BucketController.shared.buckets.count
-    
-    var cellHeights = (0..<BucketController.shared.buckets.count).map { _ in C.CellHeight.close }
+    var cellHeights = [CGFloat]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -111,32 +103,13 @@ class BucketListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
         if case let cell as FoldingCell = cell {
-            if cellHeights[indexPath.row] == C.CellHeight.close {
+            if cellHeights[indexPath.row] == kCloseCellHeight {
                 cell.selectedAnimation(false, animated: false, completion: nil)
             } else {
                 cell.selectedAnimation(true, animated: false, completion: nil)
             }
         }
     }
-    
-    
-//    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        
-//        guard case let cell as BucketCell = cell else {
-//            return
-//        }
-//        
-//        cell.backgroundColor = UIColor.darkGray
-//        
-//        if cellHeights[(indexPath as IndexPath).row] == kCloseCellHeight {
-//            cell.selectedAnimation(false, animated: false, completion: nil)
-//        } else {
-//            cell.selectedAnimation(true, animated: false, completion: nil)
-//        }
-//        cell.bucketIndex = indexPath.row
-//    }
-    
-    
     
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
