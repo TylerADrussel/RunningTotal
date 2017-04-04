@@ -30,6 +30,12 @@ class BucketCell: FoldingCell {
         
     }
     
+    
+    
+    
+    
+    
+    
     var bucketIndex: Int = 0 {
         didSet {
             bucketClosedIndex.text = String(bucketIndex)

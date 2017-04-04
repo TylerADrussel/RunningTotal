@@ -85,12 +85,10 @@ class BucketListTableViewController: UITableViewController {
         var duration = 0.0
         if cellHeights[indexPath.row] == kCloseCellHeight { // open cell
             cellHeights[indexPath.row] = kOpenCellHeight
-//            self.tableView.rowHeight = 515
             cell.selectedAnimation(true, animated: true, completion: nil)
             duration = 0.5
         } else {// close cell
             cellHeights[indexPath.row] = kCloseCellHeight
-//            self.tableView.rowHeight = 90
             cell.selectedAnimation(false, animated: true, completion: nil)
             duration = 0.8
         }
