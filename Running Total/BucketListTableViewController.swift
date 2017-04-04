@@ -21,8 +21,8 @@ class BucketListTableViewController: UITableViewController {
         tableView.reloadData()
     }    
     
-    let kCloseCellHeight: CGFloat = 75
-    let kOpenCellHeight: CGFloat = 500
+    let kCloseCellHeight: CGFloat = 90
+    let kOpenCellHeight: CGFloat = 520
     let kRowsCount = BucketController.shared.buckets.count
     var cellHeights = [CGFloat]()
     
@@ -70,7 +70,7 @@ class BucketListTableViewController: UITableViewController {
         return bucketCell
     }
     
-    func tableView(tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return cellHeights[indexPath.row]
     }
     
