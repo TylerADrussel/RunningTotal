@@ -8,11 +8,14 @@
 
 import UIKit
 
-class BucketListTableViewController: UITableViewController {
+protocol AddItemFromBucketCellDelegate {
+    func addButtonTapped(in cell: BucketCell)
+}
+
+class BucketListTableViewController: UITableViewController, AddItemFromBucketCellDelegate {
     
     @IBOutlet weak var newBucketTitleTextField: UITextField!
 
-    
     @IBAction func createNewBucketTapped(_ sender: Any) {
         
         guard let bucketName = newBucketTitleTextField.text, !bucketName.isEmpty else { return }
@@ -30,6 +33,26 @@ class BucketListTableViewController: UITableViewController {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
         createCellHeightsArray()
+    }
+    
+    // MARK: AddItemFromBucketCellDelegate Methods
+    
+    func addButtonTapped(in cell: BucketCell) {
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        let bucket = BucketController.shared.buckets[indexPath.row]
+        guard let entryTitle = cell.newEntryTitleTextField.text,
+            let entryAmountString = cell.newEntryAmountTextField.text else { return }
+        
+        let itemAmountFloat = Float(entryAmountString) ?? 0
+        
+        EntryController.shared.create(entry: entryTitle, amount: itemAmountFloat, bucket: bucket)
+        cell.newEntryTitleTextField.text = ""
+        cell.newEntryAmountTextField.text = ""
+        
+        // TODO: Add the new item to the stack view
+        
+//        cell.entryStackView.addArrangedSubview( as! UIView)
+        
     }
     
     // MARK: Configure
@@ -54,19 +77,26 @@ class BucketListTableViewController: UITableViewController {
         dateFormatter.dateFormat = "MM/dd/YYYY"
         let bucketDate = dateFormatter.string(from: bucket.bucketTimestamp as! Date)
         bucketCell.bucketTitleLabelClosedCell.text = bucket.bucketTitle
+        bucketCell.bucketTitleLabelOpenCell.text = bucket.bucketTitle
         bucketCell.bucketDatetimeLabelClosedCell.text = "\(bucketDate)"
         bucketCell.bucketClosedIndex.text = "\(BucketController.shared.buckets.index(of: bucket))"
         bucketCell.bucketOpenIndex.text = "\(BucketController.shared.buckets.index(of: bucket))"
         if bucket.entries?.count == 0 {
             bucketCell.bucketTotalLabelClosedCell.text = "0"
             bucketCell.bucketItemCountLabelClosedCell.text = "None"
+            bucketCell.bucketTotalLabelOpenCell.text = "Please add an item"
         } else {
             let entryCount = bucket.entries!.count
+            let entriesArray = bucket.entries!
             let total = BucketController.shared.total(bucket: bucket)
             bucketCell.bucketTotalLabelClosedCell.text = "\(total)"
             bucketCell.bucketItemCountLabelClosedCell.text = "\(entryCount)"
+            bucketCell.bucketTotalLabelOpenCell.text = "Running Total: \(total)"
+
+            for entry in entriesArray {
+                bucketCell.entryStackView.addArrangedSubview(entry as! UIView)
+            }
         }
-        
         return bucketCell
     }
     

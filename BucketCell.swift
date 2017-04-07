@@ -25,17 +25,14 @@ class BucketCell: FoldingCell {
     @IBOutlet weak var bucketTotalLabelOpenCell: UILabel!
     @IBOutlet weak var newEntryTitleTextField: UITextField!
     @IBOutlet weak var newEntryAmountTextField: UITextField!
+    @IBOutlet weak var entryStackView: UIStackView!
 
     @IBAction func createNewEntryTapped(_ sender: Any) {
-        
+        delegate?.addButtonTapped(in: self)
     }
     
-    
-    
-    
-    
-    
-    
+    var delegate: AddItemFromBucketCellDelegate?
+
     var bucketIndex: Int = 0 {
         didSet {
             bucketClosedIndex.text = String(bucketIndex)
@@ -44,7 +41,6 @@ class BucketCell: FoldingCell {
     }
 
     override func awakeFromNib() {
-        
         foregroundView.layer.cornerRadius = 10
         foregroundView.layer.masksToBounds = true
         super.awakeFromNib()
