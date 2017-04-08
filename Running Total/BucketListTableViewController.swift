@@ -100,7 +100,7 @@ class BucketListTableViewController: UITableViewController, AddItemFromBucketCel
         if cellHeights[indexPath.row] == kCloseCellHeight { // open cell
             cellHeights[indexPath.row] = kOpenCellHeight
             cell.selectedAnimation(true, animated: true, completion: nil)
-            duration = 0.5
+            duration = 0.5            
         } else {// close cell
             cellHeights[indexPath.row] = kCloseCellHeight
             cell.selectedAnimation(false, animated: true, completion: nil)

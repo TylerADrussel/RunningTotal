@@ -27,9 +27,30 @@ class BucketCell: FoldingCell, UITextFieldDelegate {
     @IBOutlet weak var newEntryAmountTextField: UITextField!
     @IBOutlet weak var entryStackViewEmbeddedView: UIView!
     @IBOutlet weak var entryStackView: UIStackView!
-
+    
+    var editListButton: UIButton!
+    var deleteAllEntriesButton: UIButton!
+    var cancelEditListButton: UIButton!
+    var deleteEntryButtons: [UIButton] = []
+    
     @IBAction func createNewEntryTapped(_ sender: Any) {
         delegate?.addButtonTapped(in: self)
+    }
+    
+    @IBAction func editListButtonTapped(_ sender: Any) {
+        updateViewsWithDeleteButton()
+    }
+    
+    @IBAction func deleteAllEntriesButtonTapped(_ sender: Any) {
+        let removeViews = entryStackView.arrangedSubviews
+        for view in removeViews {
+            entryStackView.removeArrangedSubview(view)
+        }
+        updateViews()
+    }
+    
+    @IBAction func cancelEditListButtonTapped(_ sender: Any) {
+        updateViews()
     }
     
     var delegate: AddItemFromBucketCellDelegate?
@@ -51,11 +72,12 @@ class BucketCell: FoldingCell, UITextFieldDelegate {
     
     func updateViews() {
         guard let bucket = self.bucket else { return }
-        
+        bringSubview(toFront: self.contentView)
+        bringSubview(toFront: self.containerView)
+        bringSubview(toFront: self.entryStackView)
+        bringSubview(toFront: self.entryStackViewEmbeddedView)
         self.newEntryTitleTextField.delegate = self
-        self.newEntryAmountTextField.delegate = self
-        
-        self.sendSubview(toBack: self.containerView)
+        self.newEntryAmountTextField.delegate = self        
         self.bucketTitleLabelClosedCell.text = bucket.bucketTitle
         self.bucketTitleLabelOpenCell.text = bucket.bucketTitle
         self.bucketDatetimeLabelClosedCell.text = "\(bucketDate ?? "No date")"
@@ -67,7 +89,7 @@ class BucketCell: FoldingCell, UITextFieldDelegate {
             self.bucketItemCountLabelClosedCell.text = "None"
             self.bucketTotalLabelOpenCell.text = "Please add an item"
         } else {
-            
+
             let removeViews = entryStackView.arrangedSubviews
             for view in removeViews {
                 entryStackView.removeArrangedSubview(view)
@@ -105,12 +127,12 @@ class BucketCell: FoldingCell, UITextFieldDelegate {
                 let stackView = UIStackView()
                 let labelTitle = UILabel()
                 let labelAmount = UILabel()
-                
+
                 labelTitle.text = entry.title
                 labelTitle.adjustsFontSizeToFitWidth = true
                 labelAmount.adjustsFontSizeToFitWidth = true
-                
                 labelAmount.text = "\(entry.amount)"
+                
                 stackView.addArrangedSubview(labelTitle)
                 stackView.addArrangedSubview(labelAmount)
                 labelAmount.translatesAutoresizingMaskIntoConstraints = false
@@ -120,9 +142,15 @@ class BucketCell: FoldingCell, UITextFieldDelegate {
 //                tapToDelete.numberOfTapsRequired = 2
 //                tapToDelete.delegate = self
 //                labelTitle.addGestureRecognizer(tapToDelete)
+                
                 stackView.axis = .horizontal
                 entryStackView.addArrangedSubview(stackView)
             }
+            
+            self.editListButton = UIButton()
+            self.editListButton.setTitle("Edit list", for: .normal)
+            self.editListButton.backgroundColor = UIColor.darkGray
+            entryStackView.addArrangedSubview(self.editListButton)
         }
     }
     
@@ -143,8 +171,95 @@ class BucketCell: FoldingCell, UITextFieldDelegate {
 //        }
 //    }
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    
+    func updateViewsWithDeleteButton() {
+        guard let bucket = self.bucket else { return }
         
+        self.newEntryTitleTextField.delegate = self
+        self.newEntryAmountTextField.delegate = self
+        
+        self.sendSubview(toBack: self.containerView)
+        self.bucketTitleLabelClosedCell.text = bucket.bucketTitle
+        self.bucketTitleLabelOpenCell.text = bucket.bucketTitle
+        self.bucketDatetimeLabelClosedCell.text = "\(bucketDate ?? "No date")"
+        self.bucketClosedIndex.text = "\(BucketController.shared.buckets.index(of: bucket))"
+        self.bucketOpenIndex.text = "\(BucketController.shared.buckets.index(of: bucket))"
+        
+        if bucket.entries?.count == 0 {
+            self.bucketTotalLabelClosedCell.text = "0"
+            self.bucketItemCountLabelClosedCell.text = "None"
+            self.bucketTotalLabelOpenCell.text = "Please add an item"
+        } else {
+            
+            let removeViews = entryStackView.arrangedSubviews
+            for view in removeViews {
+                entryStackView.removeArrangedSubview(view)
+            }
+            
+            let entryCount = bucket.entries!.count
+            let entriesSet = bucket.entries!
+            let total = BucketController.shared.total(bucket: bucket)
+            self.bucketTotalLabelClosedCell.text = "\(total)"
+            self.bucketItemCountLabelClosedCell.text = "\(entryCount)"
+            self.bucketTotalLabelOpenCell.text = "Running Total: \(total)"
+            
+            let entryStackViewTitleStackView = UIStackView()
+            let entryStackViewTitleLabel = UILabel()
+            let entryStackViewAmountLabel = UILabel()
+            entryStackViewTitleLabel.text = "Item name"
+            entryStackViewAmountLabel.text = "Amount"
+            entryStackViewTitleStackView.addArrangedSubview(entryStackViewTitleLabel)
+            entryStackViewTitleStackView.addArrangedSubview(entryStackViewAmountLabel)
+            
+            let labelAmountHeaderWidthConstraint = NSLayoutConstraint(item: entryStackViewAmountLabel, attribute: .width, relatedBy: .equal, toItem: entryStackViewTitleStackView, attribute: .width, multiplier: 1/6, constant: 0)
+            entryStackViewTitleStackView.addConstraint(labelAmountHeaderWidthConstraint)
+            
+            self.entryStackView.addArrangedSubview(entryStackViewTitleStackView)
+            
+            var entriesArray: [Entry] = []
+            
+            for entry in entriesSet {
+                guard let entry = entry as? Entry else { return }
+                entriesArray.append(entry)
+            }
+            
+            for entry in entriesArray {
+                
+                let stackView = UIStackView()
+                let labelTitle = UILabel()
+                let labelAmount = UILabel()
+                let deleteButton = UIButton()
+                
+                guard let entryIndex = entriesArray.index(of: entry) else { return }
+                
+                deleteButton.tag = entryIndex
+//                deleteButton.addTarget(self, action: <#T##Selector#>, for: .touchUpInside)
+                deleteButton.setTitle("delete", for: .normal)
+                deleteButton.backgroundColor = UIColor.darkGray
+                
+                self.deleteEntryButtons.append(deleteButton)
+                
+                stackView.addArrangedSubview(deleteButton)
+                let deleteButtonConstraint = NSLayoutConstraint(item: deleteButton, attribute: .width, relatedBy: .equal, toItem: stackView, attribute: .width, multiplier: 1/6, constant: 0)
+                stackView.addConstraint(deleteButtonConstraint)
+                
+                labelTitle.text = entry.title
+                labelTitle.adjustsFontSizeToFitWidth = true
+                labelAmount.adjustsFontSizeToFitWidth = true
+                
+                labelAmount.text = "\(entry.amount)"
+                stackView.addArrangedSubview(labelTitle)
+                stackView.addArrangedSubview(labelAmount)
+                labelAmount.translatesAutoresizingMaskIntoConstraints = false
+                let labelAmountWidthConstraint = NSLayoutConstraint(item: labelAmount, attribute: .width, relatedBy: .equal, toItem: stackView, attribute: .width, multiplier: 1/6, constant: 0)
+                stackView.addConstraint(labelAmountWidthConstraint)
+                stackView.axis = .horizontal
+                entryStackView.addArrangedSubview(stackView)
+            }
+        }
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
         if textField == newEntryAmountTextField {
             let inverseSet = NSCharacterSet(charactersIn: ".0123456789").inverted
