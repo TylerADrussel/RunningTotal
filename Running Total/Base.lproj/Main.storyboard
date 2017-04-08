@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -203,18 +204,18 @@
                                                     <rect key="frame" x="8" y="48" width="343" height="30"/>
                                                     <subviews>
                                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Item Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="73o-NY-GkU">
-                                                            <rect key="frame" x="0.0" y="0.0" width="155.5" height="30"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="143.5" height="30"/>
                                                             <nil key="textColor"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits"/>
                                                         </textField>
-                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Amount" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mQy-w1-yGJ">
-                                                            <rect key="frame" x="163.5" y="0.0" width="109.5" height="30"/>
+                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Amount" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mQy-w1-yGJ">
+                                                            <rect key="frame" x="151.5" y="0.0" width="121.5" height="30"/>
                                                             <nil key="textColor"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits"/>
                                                         </textField>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="brg-GC-hvr">
+                                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="brg-GC-hvr">
                                                             <rect key="frame" x="281" y="0.0" width="62" height="30"/>
                                                             <state key="normal" title="Add Item"/>
                                                             <connections>
@@ -268,6 +269,7 @@
                                                 <constraint firstItem="mUH-aB-a0D" firstAttribute="leading" secondItem="6cl-iD-dL7" secondAttribute="leading" constant="8" id="lPc-0F-8nv"/>
                                                 <constraint firstItem="mUH-aB-a0D" firstAttribute="top" secondItem="u9b-6B-TUy" secondAttribute="bottom" constant="8" id="pln-m7-rz1"/>
                                                 <constraint firstItem="u9b-6B-TUy" firstAttribute="leading" secondItem="6cl-iD-dL7" secondAttribute="leading" id="qjl-rJ-sVB"/>
+                                                <constraint firstItem="73o-NY-GkU" firstAttribute="width" secondItem="6cl-iD-dL7" secondAttribute="width" multiplier="2/5" id="rNB-3Q-CBx"/>
                                                 <constraint firstAttribute="trailing" secondItem="u9b-6B-TUy" secondAttribute="trailing" id="taS-Vi-WTm"/>
                                                 <constraint firstAttribute="trailing" secondItem="V1h-Gi-hn3" secondAttribute="trailing" id="x5e-Ox-GBr"/>
                                             </constraints>

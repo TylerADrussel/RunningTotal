@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BucketCell: FoldingCell {
+class BucketCell: FoldingCell, UITextFieldDelegate {
     
     // MARK: Cell Indexes
     @IBOutlet weak var bucketClosedIndex: UILabel!
@@ -51,6 +51,11 @@ class BucketCell: FoldingCell {
     
     func updateViews() {
         guard let bucket = self.bucket else { return }
+        
+        self.newEntryTitleTextField.delegate = self
+        self.newEntryAmountTextField.delegate = self
+        
+        self.sendSubview(toBack: self.containerView)
         self.bucketTitleLabelClosedCell.text = bucket.bucketTitle
         self.bucketTitleLabelOpenCell.text = bucket.bucketTitle
         self.bucketDatetimeLabelClosedCell.text = "\(bucketDate ?? "No date")"
@@ -82,6 +87,10 @@ class BucketCell: FoldingCell {
             entryStackViewAmountLabel.text = "Amount"
             entryStackViewTitleStackView.addArrangedSubview(entryStackViewTitleLabel)
             entryStackViewTitleStackView.addArrangedSubview(entryStackViewAmountLabel)
+            
+            let labelAmountHeaderWidthConstraint = NSLayoutConstraint(item: entryStackViewAmountLabel, attribute: .width, relatedBy: .equal, toItem: entryStackViewTitleStackView, attribute: .width, multiplier: 1/6, constant: 0)
+            entryStackViewTitleStackView.addConstraint(labelAmountHeaderWidthConstraint)
+            
             self.entryStackView.addArrangedSubview(entryStackViewTitleStackView)
             
             var entriesArray: [Entry] = []
@@ -96,33 +105,65 @@ class BucketCell: FoldingCell {
                 let stackView = UIStackView()
                 let labelTitle = UILabel()
                 let labelAmount = UILabel()
-//                let label = UILabel()
                 
                 labelTitle.text = entry.title
-                labelAmount.text = "\(entry.amount)"
+                labelTitle.adjustsFontSizeToFitWidth = true
+                labelAmount.adjustsFontSizeToFitWidth = true
                 
+                labelAmount.text = "\(entry.amount)"
                 stackView.addArrangedSubview(labelTitle)
                 stackView.addArrangedSubview(labelAmount)
-//                UITapGestureRecognizer(target: <#T##Any?#>, action: #selector(delete))
+                labelAmount.translatesAutoresizingMaskIntoConstraints = false
+                let labelAmountWidthConstraint = NSLayoutConstraint(item: labelAmount, attribute: .width, relatedBy: .equal, toItem: stackView, attribute: .width, multiplier: 1/6, constant: 0)
+                stackView.addConstraint(labelAmountWidthConstraint)
+//                let tapToDelete: UITapGestureRecognizer = UITapGestureRecognizer(target: stackView, action: #selector(tapToDeleteEntryStackView))
+//                tapToDelete.numberOfTapsRequired = 2
+//                tapToDelete.delegate = self
+//                labelTitle.addGestureRecognizer(tapToDelete)
                 stackView.axis = .horizontal
-//                stackView.leftAnchor.constraint(equalTo: entryStackView.leftAnchor)
-//                stackView.rightAnchor.constraint(equalTo: entryStackView.rightAnchor)
-                
-//                stackView.distribution = .fillEqually
-//                stackView.alignment = .center
-                
-//                entryStackView.leadingAnchor.constraint(equalTo: entryStackViewEmbeddedView.leadingAnchor)
-//                entryStackView.trailingAnchor.constraint(equalTo: entryStackViewEmbeddedView.trailingAnchor)
-                
                 entryStackView.addArrangedSubview(stackView)
             }
         }
     }
     
-    func delete() {
+//    override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+//        
+//        if (gestureRecognizer is UILongPressGestureRecognizer || gestureRecognizer is UITapGestureRecognizer) {
+//            print("True")
+//            return true
+//        } else {
+//            print("False")
+//            return false
+//        }
+//    }
+//    
+//    func tapToDeleteEntryStackView(recognizer: UITapGestureRecognizer) {
+//        if(recognizer.state == UIGestureRecognizerState.ended) {
+//            print("Stack tapped")
+//        }
+//    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
+        
+        if textField == newEntryAmountTextField {
+            let inverseSet = NSCharacterSet(charactersIn: ".0123456789").inverted
+            let components = string.components(separatedBy: inverseSet)
+            let filtered = components.joined(separator: "")
+            return string == filtered
+        } else if textField == newEntryTitleTextField {
+            if string == "" {
+                return true
+            }
+            let maxLength = 30
+            let currentLength = newEntryTitleTextField.text?.characters.count ?? 0
+            if currentLength > maxLength {
+                return false
+            }
+        }
+        return true
     }
-
+    
     override func awakeFromNib() {
         foregroundView.layer.cornerRadius = 10
         foregroundView.layer.masksToBounds = true

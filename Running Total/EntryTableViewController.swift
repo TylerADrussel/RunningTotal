@@ -36,9 +36,7 @@ reloadRunningTotalLabel()
         self.reloadRunningTotalLabel()
     }
 
-    func textField(_ textField: UITextField,
-                   shouldChangeCharactersIn range: NSRange,
-                   replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if textField == itemAmountField {
             let inverseSet = NSCharacterSet(charactersIn: ".0123456789").inverted
             let components = string.components(separatedBy: inverseSet)
