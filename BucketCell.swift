@@ -25,6 +25,7 @@ class BucketCell: FoldingCell {
     @IBOutlet weak var bucketTotalLabelOpenCell: UILabel!
     @IBOutlet weak var newEntryTitleTextField: UITextField!
     @IBOutlet weak var newEntryAmountTextField: UITextField!
+    @IBOutlet weak var entryStackViewEmbeddedView: UIView!
     @IBOutlet weak var entryStackView: UIStackView!
 
     @IBAction func createNewEntryTapped(_ sender: Any) {
@@ -55,17 +56,33 @@ class BucketCell: FoldingCell {
         self.bucketDatetimeLabelClosedCell.text = "\(bucketDate ?? "No date")"
         self.bucketClosedIndex.text = "\(BucketController.shared.buckets.index(of: bucket))"
         self.bucketOpenIndex.text = "\(BucketController.shared.buckets.index(of: bucket))"
+        
         if bucket.entries?.count == 0 {
             self.bucketTotalLabelClosedCell.text = "0"
             self.bucketItemCountLabelClosedCell.text = "None"
             self.bucketTotalLabelOpenCell.text = "Please add an item"
         } else {
+            
+            let removeViews = entryStackView.arrangedSubviews
+            for view in removeViews {
+                entryStackView.removeArrangedSubview(view)
+            }
+
             let entryCount = bucket.entries!.count
             let entriesSet = bucket.entries!
             let total = BucketController.shared.total(bucket: bucket)
             self.bucketTotalLabelClosedCell.text = "\(total)"
             self.bucketItemCountLabelClosedCell.text = "\(entryCount)"
             self.bucketTotalLabelOpenCell.text = "Running Total: \(total)"
+            
+            let entryStackViewTitleStackView = UIStackView()
+            let entryStackViewTitleLabel = UILabel()
+            let entryStackViewAmountLabel = UILabel()
+            entryStackViewTitleLabel.text = "Item name"
+            entryStackViewAmountLabel.text = "Amount"
+            entryStackViewTitleStackView.addArrangedSubview(entryStackViewTitleLabel)
+            entryStackViewTitleStackView.addArrangedSubview(entryStackViewAmountLabel)
+            self.entryStackView.addArrangedSubview(entryStackViewTitleStackView)
             
             var entriesArray: [Entry] = []
             
@@ -75,13 +92,34 @@ class BucketCell: FoldingCell {
             }
             
             for entry in entriesArray {
-                let label = UILabel()
                 
-                label.text = entry.title
+                let stackView = UIStackView()
+                let labelTitle = UILabel()
+                let labelAmount = UILabel()
+//                let label = UILabel()
                 
-                entryStackView.addArrangedSubview(label)
+                labelTitle.text = entry.title
+                labelAmount.text = "\(entry.amount)"
+                
+                stackView.addArrangedSubview(labelTitle)
+                stackView.addArrangedSubview(labelAmount)
+//                UITapGestureRecognizer(target: <#T##Any?#>, action: #selector(delete))
+                stackView.axis = .horizontal
+//                stackView.leftAnchor.constraint(equalTo: entryStackView.leftAnchor)
+//                stackView.rightAnchor.constraint(equalTo: entryStackView.rightAnchor)
+                
+//                stackView.distribution = .fillEqually
+//                stackView.alignment = .center
+                
+//                entryStackView.leadingAnchor.constraint(equalTo: entryStackViewEmbeddedView.leadingAnchor)
+//                entryStackView.trailingAnchor.constraint(equalTo: entryStackViewEmbeddedView.trailingAnchor)
+                
+                entryStackView.addArrangedSubview(stackView)
             }
         }
+    }
+    
+    func delete() {
         
     }
 

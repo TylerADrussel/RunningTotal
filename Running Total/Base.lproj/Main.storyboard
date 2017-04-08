@@ -303,6 +303,7 @@
                                     <outlet property="containerView" destination="6cl-iD-dL7" id="7dF-xY-JHO"/>
                                     <outlet property="containerViewTop" destination="IAD-P3-zY9" id="Eyd-5C-r0j"/>
                                     <outlet property="entryStackView" destination="jJs-1F-tNc" id="A5a-GP-fIp"/>
+                                    <outlet property="entryStackViewEmbeddedView" destination="eaH-OJ-rJY" id="Z2W-9Y-aEE"/>
                                     <outlet property="foregroundView" destination="R1V-Uj-Q5f" id="miT-Ft-NJ0"/>
                                     <outlet property="foregroundViewTop" destination="p1K-rA-VOR" id="d9N-NE-adP"/>
                                     <outlet property="newEntryAmountTextField" destination="mQy-w1-yGJ" id="duB-5U-6ge"/>
