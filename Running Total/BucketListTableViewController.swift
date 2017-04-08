@@ -48,10 +48,10 @@ class BucketListTableViewController: UITableViewController, AddItemFromBucketCel
         EntryController.shared.create(entry: entryTitle, amount: itemAmountFloat, bucket: bucket)
         cell.newEntryTitleTextField.text = ""
         cell.newEntryAmountTextField.text = ""
-        
+        tableView.reloadData()
         // TODO: Add the new item to the stack view
         
-//        cell.entryStackView.addArrangedSubview( as! UIView)
+//        cell.entryStackView.addArrangedSubview( as! UIView)x
         
     }
     
@@ -76,27 +76,11 @@ class BucketListTableViewController: UITableViewController, AddItemFromBucketCel
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/YYYY"
         let bucketDate = dateFormatter.string(from: bucket.bucketTimestamp as! Date)
-        bucketCell.bucketTitleLabelClosedCell.text = bucket.bucketTitle
-        bucketCell.bucketTitleLabelOpenCell.text = bucket.bucketTitle
-        bucketCell.bucketDatetimeLabelClosedCell.text = "\(bucketDate)"
-        bucketCell.bucketClosedIndex.text = "\(BucketController.shared.buckets.index(of: bucket))"
-        bucketCell.bucketOpenIndex.text = "\(BucketController.shared.buckets.index(of: bucket))"
-        if bucket.entries?.count == 0 {
-            bucketCell.bucketTotalLabelClosedCell.text = "0"
-            bucketCell.bucketItemCountLabelClosedCell.text = "None"
-            bucketCell.bucketTotalLabelOpenCell.text = "Please add an item"
-        } else {
-            let entryCount = bucket.entries!.count
-            let entriesArray = bucket.entries!
-            let total = BucketController.shared.total(bucket: bucket)
-            bucketCell.bucketTotalLabelClosedCell.text = "\(total)"
-            bucketCell.bucketItemCountLabelClosedCell.text = "\(entryCount)"
-            bucketCell.bucketTotalLabelOpenCell.text = "Running Total: \(total)"
-
-            for entry in entriesArray {
-                bucketCell.entryStackView.addArrangedSubview(entry as! UIView)
-            }
-        }
+        
+        bucketCell.bucketDate = bucketDate
+        bucketCell.bucket = bucket
+        bucketCell.delegate = self
+        
         return bucketCell
     }
     

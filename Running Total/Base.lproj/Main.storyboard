@@ -239,7 +239,7 @@
                                                 <view contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="eaH-OJ-rJY">
                                                     <rect key="frame" x="0.0" y="124" width="359" height="368"/>
                                                     <subviews>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="jJs-1F-tNc">
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="jJs-1F-tNc">
                                                             <rect key="frame" x="8" y="8" width="343" height="352"/>
                                                         </stackView>
                                                     </subviews>
@@ -248,7 +248,7 @@
                                                         <constraint firstItem="jJs-1F-tNc" firstAttribute="top" secondItem="eaH-OJ-rJY" secondAttribute="top" constant="8" id="FjV-T4-GeN"/>
                                                         <constraint firstItem="jJs-1F-tNc" firstAttribute="leading" secondItem="eaH-OJ-rJY" secondAttribute="leading" constant="8" id="UAd-lD-pJo"/>
                                                         <constraint firstAttribute="height" constant="368" id="iqr-hb-olW"/>
-                                                        <constraint firstAttribute="bottom" secondItem="jJs-1F-tNc" secondAttribute="bottom" constant="8" id="scb-jT-14w"/>
+                                                        <constraint firstAttribute="bottom" secondItem="jJs-1F-tNc" secondAttribute="bottom" constant="8" placeholder="YES" id="scb-jT-14w"/>
                                                         <constraint firstAttribute="trailing" secondItem="jJs-1F-tNc" secondAttribute="trailing" constant="8" id="stD-ER-Oeg"/>
                                                     </constraints>
                                                 </view>

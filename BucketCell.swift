@@ -32,12 +32,57 @@ class BucketCell: FoldingCell {
     }
     
     var delegate: AddItemFromBucketCellDelegate?
+    
+    var bucket: Bucket? {
+        didSet {
+            updateViews()
+        }
+    }
+    
+    var bucketDate: String?
 
     var bucketIndex: Int = 0 {
         didSet {
             bucketClosedIndex.text = String(bucketIndex)
             bucketOpenIndex.text = String(bucketIndex)
         }
+    }
+    
+    func updateViews() {
+        guard let bucket = self.bucket else { return }
+        self.bucketTitleLabelClosedCell.text = bucket.bucketTitle
+        self.bucketTitleLabelOpenCell.text = bucket.bucketTitle
+        self.bucketDatetimeLabelClosedCell.text = "\(bucketDate ?? "No date")"
+        self.bucketClosedIndex.text = "\(BucketController.shared.buckets.index(of: bucket))"
+        self.bucketOpenIndex.text = "\(BucketController.shared.buckets.index(of: bucket))"
+        if bucket.entries?.count == 0 {
+            self.bucketTotalLabelClosedCell.text = "0"
+            self.bucketItemCountLabelClosedCell.text = "None"
+            self.bucketTotalLabelOpenCell.text = "Please add an item"
+        } else {
+            let entryCount = bucket.entries!.count
+            let entriesSet = bucket.entries!
+            let total = BucketController.shared.total(bucket: bucket)
+            self.bucketTotalLabelClosedCell.text = "\(total)"
+            self.bucketItemCountLabelClosedCell.text = "\(entryCount)"
+            self.bucketTotalLabelOpenCell.text = "Running Total: \(total)"
+            
+            var entriesArray: [Entry] = []
+            
+            for entry in entriesSet {
+                guard let entry = entry as? Entry else { return }
+                entriesArray.append(entry)
+            }
+            
+            for entry in entriesArray {
+                let label = UILabel()
+                
+                label.text = entry.title
+                
+                entryStackView.addArrangedSubview(label)
+            }
+        }
+        
     }
 
     override func awakeFromNib() {
