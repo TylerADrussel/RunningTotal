@@ -34,26 +34,32 @@ class BucketCell: FoldingCell, UITextFieldDelegate {
     var deleteEntryButtons: [UIButton] = []
     
     @IBAction func createNewEntryTapped(_ sender: Any) {
-        delegate?.addButtonTapped(in: self)
+        addItemDelegate?.addButtonTapped(in: self)
     }
     
-    @IBAction func editListButtonTapped(_ sender: Any) {
+    func editListButtonTapped(_ sender: Any) {
+        updateViewsWithDeleteButton()
+        editItemListDelegate?.editButtonTapped(in: self)
+        }
+    
+    func deleteItemButtonTapped(_ sender: Any) {
         updateViewsWithDeleteButton()
     }
     
-    @IBAction func deleteAllEntriesButtonTapped(_ sender: Any) {
-        let removeViews = entryStackView.arrangedSubviews
-        for view in removeViews {
-            entryStackView.removeArrangedSubview(view)
-        }
+    func deleteAllEntriesButtonTapped(_ sender: Any) {
+        deleteAllEntriesDelegate?.deleteAllEntriesButtonTapped(in: self)
         updateViews()
     }
     
-    @IBAction func cancelEditListButtonTapped(_ sender: Any) {
+    func cancelEditListButtonTapped(_ sender: Any) {
         updateViews()
     }
     
-    var delegate: AddItemFromBucketCellDelegate?
+    weak var addItemDelegate: AddItemFromBucketCellDelegate?
+    weak var editItemListDelegate: EditItemListInBucketCellDelegate?
+    weak var deleteItemDelegate: DeleteItemInBucketCellDelegate?
+    weak var deleteAllEntriesDelegate: DeleteAllEntriesInBucketCellDelegate?
+    weak var cancelDelegate: CancelEditInBucketCellDelegate?
     
     var bucket: Bucket? {
         didSet {
@@ -72,10 +78,6 @@ class BucketCell: FoldingCell, UITextFieldDelegate {
     
     func updateViews() {
         guard let bucket = self.bucket else { return }
-        bringSubview(toFront: self.contentView)
-        bringSubview(toFront: self.containerView)
-        bringSubview(toFront: self.entryStackView)
-        bringSubview(toFront: self.entryStackViewEmbeddedView)
         self.newEntryTitleTextField.delegate = self
         self.newEntryAmountTextField.delegate = self        
         self.bucketTitleLabelClosedCell.text = bucket.bucketTitle
@@ -138,10 +140,6 @@ class BucketCell: FoldingCell, UITextFieldDelegate {
                 labelAmount.translatesAutoresizingMaskIntoConstraints = false
                 let labelAmountWidthConstraint = NSLayoutConstraint(item: labelAmount, attribute: .width, relatedBy: .equal, toItem: stackView, attribute: .width, multiplier: 1/6, constant: 0)
                 stackView.addConstraint(labelAmountWidthConstraint)
-//                let tapToDelete: UITapGestureRecognizer = UITapGestureRecognizer(target: stackView, action: #selector(tapToDeleteEntryStackView))
-//                tapToDelete.numberOfTapsRequired = 2
-//                tapToDelete.delegate = self
-//                labelTitle.addGestureRecognizer(tapToDelete)
                 
                 stackView.axis = .horizontal
                 entryStackView.addArrangedSubview(stackView)
@@ -151,34 +149,15 @@ class BucketCell: FoldingCell, UITextFieldDelegate {
             self.editListButton.setTitle("Edit list", for: .normal)
             self.editListButton.backgroundColor = UIColor.darkGray
             entryStackView.addArrangedSubview(self.editListButton)
+            editListButton.addTarget(self, action: #selector(editListButtonTapped(_:)), for: .touchUpInside)
         }
     }
-    
-//    override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-//        
-//        if (gestureRecognizer is UILongPressGestureRecognizer || gestureRecognizer is UITapGestureRecognizer) {
-//            print("True")
-//            return true
-//        } else {
-//            print("False")
-//            return false
-//        }
-//    }
-//    
-//    func tapToDeleteEntryStackView(recognizer: UITapGestureRecognizer) {
-//        if(recognizer.state == UIGestureRecognizerState.ended) {
-//            print("Stack tapped")
-//        }
-//    }
-    
     
     func updateViewsWithDeleteButton() {
         guard let bucket = self.bucket else { return }
         
         self.newEntryTitleTextField.delegate = self
         self.newEntryAmountTextField.delegate = self
-        
-        self.sendSubview(toBack: self.containerView)
         self.bucketTitleLabelClosedCell.text = bucket.bucketTitle
         self.bucketTitleLabelOpenCell.text = bucket.bucketTitle
         self.bucketDatetimeLabelClosedCell.text = "\(bucketDate ?? "No date")"
@@ -256,6 +235,19 @@ class BucketCell: FoldingCell, UITextFieldDelegate {
                 stackView.axis = .horizontal
                 entryStackView.addArrangedSubview(stackView)
             }
+            
+            self.cancelEditListButton = UIButton()
+            self.cancelEditListButton.setTitle("Cancel", for: .normal)
+            self.cancelEditListButton.backgroundColor = UIColor.darkGray
+            self.cancelEditListButton.addTarget(self, action: #selector(cancelEditListButtonTapped(_:)), for: .touchUpInside)
+            entryStackView.addArrangedSubview(self.cancelEditListButton)
+            
+            self.deleteAllEntriesButton = UIButton()
+            self.deleteAllEntriesButton.setTitle("Delete All", for: .normal)
+            self.deleteAllEntriesButton.backgroundColor = UIColor.red
+            self.deleteAllEntriesButton.addTarget(self, action: #selector(deleteAllEntriesButtonTapped(_:)), for: .touchUpInside)
+            entryStackView.addArrangedSubview(self.deleteAllEntriesButton)
+            
         }
     }
     
