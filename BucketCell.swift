@@ -29,7 +29,6 @@ class BucketCell: FoldingCell, UITextFieldDelegate {
     @IBOutlet weak var entryStackView: UIStackView!
     
     var editListButton: UIButton!
-//    var deleteAllEntriesButton: UIButton!
     var cancelEditListButton: UIButton!
     var deleteEntryButtons: [UIButton] = []
     
@@ -120,28 +119,40 @@ class BucketCell: FoldingCell, UITextFieldDelegate {
                 entriesArray.append(entry)
             }
             
-            for entry in entriesArray {
-                
-                let stackView = UIStackView()
-                let labelTitle = UILabel()
-                let labelAmount = UILabel()
-
-                labelTitle.text = entry.title
-                labelTitle.adjustsFontSizeToFitWidth = true
-                labelAmount.adjustsFontSizeToFitWidth = true
-                labelAmount.text = "\(entry.amount)"
-                
-                stackView.addArrangedSubview(labelTitle)
-                stackView.addArrangedSubview(labelAmount)
-                labelAmount.translatesAutoresizingMaskIntoConstraints = false
-                let labelAmountWidthConstraint = NSLayoutConstraint(item: labelAmount, attribute: .width, relatedBy: .equal, toItem: stackView, attribute: .width, multiplier: 1/6, constant: 0)
-                stackView.addConstraint(labelAmountWidthConstraint)
-                
-                stackView.axis = .horizontal
-                entryStackView.addArrangedSubview(stackView)
-            }
-            
             if withDeleteButton == true {
+                
+                for entry in entriesArray {
+                    
+                    let stackView = UIStackView()
+                    let labelTitle = UILabel()
+                    let labelAmount = UILabel()
+                    let deleteButton = UIButton()
+                    
+                    guard let entryIndex = entriesArray.index(of: entry) else { return }
+                    
+                    deleteButton.tag = entryIndex
+                    deleteButton.setTitle("delete", for: .normal)
+                    deleteButton.backgroundColor = UIColor.darkGray
+                    
+                    self.deleteEntryButtons.append(deleteButton)
+                    
+                    stackView.addArrangedSubview(deleteButton)
+                    let deleteButtonConstraint = NSLayoutConstraint(item: deleteButton, attribute: .width, relatedBy: .equal, toItem: stackView, attribute: .width, multiplier: 1/6, constant: 0)
+                    stackView.addConstraint(deleteButtonConstraint)
+                    
+                    labelTitle.text = entry.title
+                    labelTitle.adjustsFontSizeToFitWidth = true
+                    labelAmount.adjustsFontSizeToFitWidth = true
+                    
+                    labelAmount.text = "\(entry.amount)"
+                    stackView.addArrangedSubview(labelTitle)
+                    stackView.addArrangedSubview(labelAmount)
+                    labelAmount.translatesAutoresizingMaskIntoConstraints = false
+                    let labelAmountWidthConstraint = NSLayoutConstraint(item: labelAmount, attribute: .width, relatedBy: .equal, toItem: stackView, attribute: .width, multiplier: 1/6, constant: 0)
+                    stackView.addConstraint(labelAmountWidthConstraint)
+                    stackView.axis = .horizontal
+                    entryStackView.addArrangedSubview(stackView)
+                }
                 
                 self.cancelEditListButton = UIButton()
                 self.cancelEditListButton.setTitle("Cancel", for: .normal)
@@ -158,6 +169,27 @@ class BucketCell: FoldingCell, UITextFieldDelegate {
                 entryStackView.addArrangedSubview(deleteAllEntriesButton)
                 
             } else {
+                
+                for entry in entriesArray {
+                    
+                    let stackView = UIStackView()
+                    let labelTitle = UILabel()
+                    let labelAmount = UILabel()
+                    
+                    labelTitle.text = entry.title
+                    labelTitle.adjustsFontSizeToFitWidth = true
+                    labelAmount.adjustsFontSizeToFitWidth = true
+                    labelAmount.text = "\(entry.amount)"
+                    
+                    stackView.addArrangedSubview(labelTitle)
+                    stackView.addArrangedSubview(labelAmount)
+                    labelAmount.translatesAutoresizingMaskIntoConstraints = false
+                    let labelAmountWidthConstraint = NSLayoutConstraint(item: labelAmount, attribute: .width, relatedBy: .equal, toItem: stackView, attribute: .width, multiplier: 1/6, constant: 0)
+                    stackView.addConstraint(labelAmountWidthConstraint)
+                    
+                    stackView.axis = .horizontal
+                    entryStackView.addArrangedSubview(stackView)
+                }
                 
                 self.editListButton = UIButton()
                 self.editListButton.setTitle("Edit list", for: .normal)

@@ -57,7 +57,6 @@ class BucketListTableViewController: UITableViewController, BucketCellDelegate {
     
     func editButtonTapped(in cell: BucketCell) {
         guard let _ = tableView.indexPath(for: cell) else { return }
-//        tableView.reloadData()
     }
     
     func deleteItemButtonTapped(in cell: BucketCell) {
@@ -68,12 +67,10 @@ class BucketListTableViewController: UITableViewController, BucketCellDelegate {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         let bucket = BucketController.shared.buckets[indexPath.row]
         EntryController.shared.removeAll(bucket: bucket)
-        tableView.reloadData()
     }
     
     func cancelButtonTapped(in cell: BucketCell) {
         guard let _ = tableView.indexPath(for: cell) else { return }
-        tableView.reloadData()
     }
     
     // MARK: Configure
