@@ -8,27 +8,15 @@
 
 import UIKit
 
-protocol AddItemFromBucketCellDelegate: class {
+protocol BucketCellDelegate: class {
     func addButtonTapped(in cell: BucketCell)
-}
-
-protocol EditItemListInBucketCellDelegate: class {
     func editButtonTapped(in cell: BucketCell)
-}
-
-protocol DeleteItemInBucketCellDelegate: class {
+    func cancelButtonTapped(in cell: BucketCell)
     func deleteItemButtonTapped(in cell: BucketCell)
-}
-
-protocol DeleteAllEntriesInBucketCellDelegate: class {
     func deleteAllEntriesButtonTapped(in cell: BucketCell)
 }
 
-protocol CancelEditInBucketCellDelegate: class {
-    func cancelButtonTapped(in cell: BucketCell)
-}
-
-class BucketListTableViewController: UITableViewController, AddItemFromBucketCellDelegate, DeleteAllEntriesInBucketCellDelegate {
+class BucketListTableViewController: UITableViewController, BucketCellDelegate {
     
     @IBOutlet weak var newBucketTitleTextField: UITextField!
 
@@ -51,7 +39,7 @@ class BucketListTableViewController: UITableViewController, AddItemFromBucketCel
         createCellHeightsArray()
     }
     
-    // MARK: AddItemFromBucketCellDelegate Methods
+    // MARK: BucketCellDelegate Methods
     
     func addButtonTapped(in cell: BucketCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
@@ -67,33 +55,21 @@ class BucketListTableViewController: UITableViewController, AddItemFromBucketCel
         tableView.reloadData()
     }
     
-    // MARK: EditItemListInBucketCellDelegate Methods
-    
     func editButtonTapped(in cell: BucketCell) {
         guard let _ = tableView.indexPath(for: cell) else { return }
-        tableView.reloadData()
+//        tableView.reloadData()
     }
-    
-    // MARK: DeleteItemInBucketCellDelegate Methods
     
     func deleteItemButtonTapped(in cell: BucketCell) {
         
     }
     
-    // MARK: DeleteAllEntriesInBuckerCellDelegate Methods
-    
     func deleteAllEntriesButtonTapped(in cell: BucketCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         let bucket = BucketController.shared.buckets[indexPath.row]
-        let entriesSet = bucket.entries!
-        for entry in entriesSet {
-            guard let entry = entry as? Entry else { return }
-            EntryController.shared.remove(entry: entry)
-        }
+        EntryController.shared.removeAll(bucket: bucket)
         tableView.reloadData()
     }
-    
-    // MARK: CancelEditInBuckerCellDelegate Methods
     
     func cancelButtonTapped(in cell: BucketCell) {
         guard let _ = tableView.indexPath(for: cell) else { return }
@@ -124,8 +100,7 @@ class BucketListTableViewController: UITableViewController, AddItemFromBucketCel
         
         bucketCell.bucketDate = bucketDate
         bucketCell.bucket = bucket
-        bucketCell.addItemDelegate = self
-        bucketCell.deleteAllEntriesDelegate = self
+        bucketCell.bucketCellDelegate = self
         return bucketCell
     }
     

@@ -27,6 +27,18 @@ class EntryController {
         saveToPersistentStorage()
     }
     
+    func removeAll(bucket: Bucket) {
+        let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Entry")
+        fetch.predicate = NSPredicate(format: "bucket = %@", bucket)
+        let request = NSBatchDeleteRequest(fetchRequest: fetch)
+        
+        do {
+            _ = try CoreDataStack.context.execute(request)
+        } catch {
+            fatalError("Failed to execute request: \(error)")
+        }
+    }
+        
     // MARK: Private
     
     private func saveToPersistentStorage() {

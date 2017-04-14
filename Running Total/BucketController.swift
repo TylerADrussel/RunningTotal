@@ -23,6 +23,8 @@ class BucketController {
             return []
         }
     }
+    
+    
 
     func create(bucket bucketTitle: String, timestamp: Date = Date()) {
         let _ = Bucket(bucketTitle: bucketTitle)
@@ -33,7 +35,7 @@ class BucketController {
         bucket.managedObjectContext?.delete(bucket)
         saveToPersistentStorage()
     }
-    
+        
     func total(bucket: Bucket) -> Float {
         
         var total: Float = 0
