@@ -24,8 +24,6 @@ class BucketController {
         }
     }
     
-    
-
     func create(bucket bucketTitle: String, timestamp: Date = Date()) {
         let _ = Bucket(bucketTitle: bucketTitle)
         saveToPersistentStorage()
@@ -46,7 +44,6 @@ class BucketController {
             }
         }
         return total
-
     }
     
     // MARK: Private

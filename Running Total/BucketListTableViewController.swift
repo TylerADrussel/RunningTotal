@@ -43,6 +43,9 @@ class BucketListTableViewController: UITableViewController, BucketCellDelegate {
     
     func addButtonTapped(in cell: BucketCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
+        if cell.newEntryTitleTextField.text == "" || cell.newEntryAmountTextField.text == "" {
+            return
+        } else {
         let bucket = BucketController.shared.buckets[indexPath.row]
         guard let entryTitle = cell.newEntryTitleTextField.text,
             let entryAmountString = cell.newEntryAmountTextField.text else { return }
@@ -53,6 +56,7 @@ class BucketListTableViewController: UITableViewController, BucketCellDelegate {
         cell.newEntryTitleTextField.text = ""
         cell.newEntryAmountTextField.text = ""
         tableView.reloadData()
+        }
     }
     
     func editButtonTapped(in cell: BucketCell) {
@@ -67,6 +71,7 @@ class BucketListTableViewController: UITableViewController, BucketCellDelegate {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         let bucket = BucketController.shared.buckets[indexPath.row]
         EntryController.shared.removeAll(bucket: bucket)
+        tableView.reloadData()
     }
     
     func cancelButtonTapped(in cell: BucketCell) {
@@ -93,7 +98,7 @@ class BucketListTableViewController: UITableViewController, BucketCellDelegate {
         let bucket = BucketController.shared.buckets[indexPath.row]
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/YYYY"
-        let bucketDate = dateFormatter.string(from: bucket.bucketTimestamp as! Date)
+        let bucketDate = dateFormatter.string(from: bucket.bucketTimestamp! as Date)
         
         bucketCell.bucketDate = bucketDate
         bucketCell.bucket = bucket

@@ -46,8 +46,8 @@ class BucketCell: FoldingCell, UITextFieldDelegate {
     }
     
     func deleteAllEntriesButtonTapped(_ sender: Any) {
-        bucketCellDelegate?.deleteAllEntriesButtonTapped(in: self)
         updateViews(withDeleteButton: false)
+        bucketCellDelegate?.deleteAllEntriesButtonTapped(in: self)
     }
     
     func cancelEditListButtonTapped(_ sender: Any) {
@@ -78,19 +78,19 @@ class BucketCell: FoldingCell, UITextFieldDelegate {
         self.bucketTitleLabelClosedCell.text = bucket.bucketTitle
         self.bucketTitleLabelOpenCell.text = bucket.bucketTitle
         self.bucketDatetimeLabelClosedCell.text = "\(bucketDate ?? "No date")"
-        self.bucketClosedIndex.text = "\(BucketController.shared.buckets.index(of: bucket))"
-        self.bucketOpenIndex.text = "\(BucketController.shared.buckets.index(of: bucket))"
+        self.bucketClosedIndex.text = "\(String(describing: BucketController.shared.buckets.index(of: bucket)))"
+        self.bucketOpenIndex.text = "\(String(describing: BucketController.shared.buckets.index(of: bucket)))"
+        
+        let removeViews = entryStackView.arrangedSubviews
+        for view in removeViews {
+            view.removeFromSuperview()
+        }
         
         if bucket.entries?.count == 0 {
             self.bucketTotalLabelClosedCell.text = "0"
             self.bucketItemCountLabelClosedCell.text = "None"
             self.bucketTotalLabelOpenCell.text = "Please add an item"
         } else {
-
-            let removeViews = entryStackView.arrangedSubviews
-            for view in removeViews {
-                view.removeFromSuperview()
-            }
 
             let entryCount = bucket.entries!.count
             let entriesSet = bucket.entries!

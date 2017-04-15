@@ -32,10 +32,15 @@ class EntryController {
         fetch.predicate = NSPredicate(format: "bucket = %@", bucket)
         let request = NSBatchDeleteRequest(fetchRequest: fetch)
         
+        request.resultType = NSBatchDeleteRequestResultType.resultTypeObjectIDs
+        
         do {
-            _ = try CoreDataStack.context.execute(request)
+            let result = try CoreDataStack.context.execute(request) as? NSBatchDeleteResult
+            let objectIDArray = result?.result as? [NSManagedObjectID]
+            let changes = [NSDeletedObjectsKey : objectIDArray]
+            NSManagedObjectContext.mergeChanges(fromRemoteContextSave: changes, into: [CoreDataStack.context])
         } catch {
-            fatalError("Failed to execute request: \(error)")
+            fatalError("Failed to perform batch update: \(error)")
         }
     }
         
