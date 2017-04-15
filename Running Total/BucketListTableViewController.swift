@@ -28,6 +28,28 @@ class BucketListTableViewController: UITableViewController, BucketCellDelegate {
         tableView.reloadData()
     }    
     
+/* 
+     500 = Container height
+     40  = Cell Title View
+     8   = Bottom Space to Stack View
+     8   = Top Space to Superview
+     30  = Stackview height
+     8   = Bottom Space to Total Label
+     30  = Total Label height
+     8   = Bottom Space to stack view
+     8   = Top Space to Total Label
+     368 = Stackview height
+     8   = Bottom Space to Superview
+     
+     468 = Total of all views
+     48  = Total of all spaces
+     516 = Total of everything
+     
+     148 = Total without StackView height
+     
+     Should only have 4 spaces of 8 height
+*/
+    
     let kCloseCellHeight: CGFloat = 90
     let kOpenCellHeight: CGFloat = 520
     let kRowsCount = BucketController.shared.buckets.count
@@ -64,7 +86,6 @@ class BucketListTableViewController: UITableViewController, BucketCellDelegate {
     }
     
     func deleteItemButtonTapped(in cell: BucketCell) {
-        
     }
     
     func deleteAllEntriesButtonTapped(in cell: BucketCell) {
@@ -119,11 +140,13 @@ class BucketListTableViewController: UITableViewController, BucketCellDelegate {
         }
         
         var duration = 0.0
-        if cellHeights[indexPath.row] == kCloseCellHeight { // open cell
+    // Open cell
+        if cellHeights[indexPath.row] == kCloseCellHeight {
             cellHeights[indexPath.row] = kOpenCellHeight
             cell.selectedAnimation(true, animated: true, completion: nil)
-            duration = 0.5            
-        } else {// close cell
+            duration = 0.5
+        } else {
+    // Close cell
             cellHeights[indexPath.row] = kCloseCellHeight
             cell.selectedAnimation(false, animated: true, completion: nil)
             duration = 0.8

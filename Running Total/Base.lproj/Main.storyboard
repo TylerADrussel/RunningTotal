@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="2S6-Tv-hgW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="2S6-Tv-hgW">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -55,7 +55,7 @@
                                 <rect key="frame" x="0.0" y="72" width="375" height="576"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gD7-Aw-byA" id="q0n-QF-kG0">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="575"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="575.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R1V-Uj-Q5f" customClass="RotatedView" customModule="Running_Total" customModuleProvider="target">
@@ -294,6 +294,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
+                                    <outlet property="bucketCellOpenHeight" destination="1vc-Bd-Gbv" id="uNT-W2-SMR"/>
                                     <outlet property="bucketClosedIndex" destination="ejI-5F-Tik" id="sHd-H2-GVu"/>
                                     <outlet property="bucketDatetimeLabelClosedCell" destination="9y7-ih-gIr" id="dbo-vq-KL1"/>
                                     <outlet property="bucketItemCountLabelClosedCell" destination="qFk-If-jEW" id="Byt-Ym-3Ou"/>

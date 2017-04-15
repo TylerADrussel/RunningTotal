@@ -220,7 +220,7 @@ open class FoldingCell: UITableViewCell {
             // decrease containerView height or increase itemCount
             assert(contSize.height - 2 * forgSize.height == 0, "contanerView.height too high")
         }
-        else{
+        else {
             // decrease containerView height or increase itemCount
             assert(contSize.height - 2 * forgSize.height >= itemHeight, "contanerView.height too high")
         }
@@ -508,9 +508,10 @@ extension UIView {
   func pb_takeSnapshot(_ frame: CGRect) -> UIImage? {
     UIGraphicsBeginImageContextWithOptions(frame.size, false, 0.0)
     
+
     let context = UIGraphicsGetCurrentContext();
     context!.translateBy(x: frame.origin.x * -1, y: frame.origin.y * -1)
-    
+
     guard let currentContext = UIGraphicsGetCurrentContext() else {
       return nil
     }

@@ -27,6 +27,7 @@ class BucketCell: FoldingCell, UITextFieldDelegate {
     @IBOutlet weak var newEntryAmountTextField: UITextField!
     @IBOutlet weak var entryStackViewEmbeddedView: UIView!
     @IBOutlet weak var entryStackView: UIStackView!
+    @IBOutlet weak var bucketCellOpenHeight: NSLayoutConstraint!
     
     var editListButton: UIButton!
     var cancelEditListButton: UIButton!
@@ -42,6 +43,7 @@ class BucketCell: FoldingCell, UITextFieldDelegate {
     }
     
     func deleteItemButtonTapped(_ sender: Any) {
+        
         updateViews(withDeleteButton: true)
     }
     
@@ -71,6 +73,8 @@ class BucketCell: FoldingCell, UITextFieldDelegate {
         }
     }
     
+    // MARK: Update Views method. Creates normal view, or editing view.
+    
     func updateViews(withDeleteButton: Bool) {
         guard let bucket = self.bucket else { return }
         self.newEntryTitleTextField.delegate = self
@@ -90,6 +94,7 @@ class BucketCell: FoldingCell, UITextFieldDelegate {
             self.bucketTotalLabelClosedCell.text = "0"
             self.bucketItemCountLabelClosedCell.text = "None"
             self.bucketTotalLabelOpenCell.text = "Please add an item"
+            
         } else {
 
             let entryCount = bucket.entries!.count
@@ -133,9 +138,8 @@ class BucketCell: FoldingCell, UITextFieldDelegate {
                     deleteButton.tag = entryIndex
                     deleteButton.setTitle("delete", for: .normal)
                     deleteButton.backgroundColor = UIColor.darkGray
-                    
+                    deleteButton.addTarget(self, action: #selector(deleteItemButtonTapped(_:)), for: .touchUpInside)
                     self.deleteEntryButtons.append(deleteButton)
-                    
                     stackView.addArrangedSubview(deleteButton)
                     let deleteButtonConstraint = NSLayoutConstraint(item: deleteButton, attribute: .width, relatedBy: .equal, toItem: stackView, attribute: .width, multiplier: 1/6, constant: 0)
                     stackView.addConstraint(deleteButtonConstraint)
@@ -199,7 +203,32 @@ class BucketCell: FoldingCell, UITextFieldDelegate {
 
             }
         }
+//        setOpenCellHeight(stackView: entryStackView, containerViewHeightContraint: bucketCellOpenHeight)
     }
+    
+    // MARK: Open cell height setting method
+    
+    func setOpenCellHeight(stackView: UIStackView, containerViewHeightContraint: NSLayoutConstraint) {
+        
+        let countOfViews = stackView.arrangedSubviews.count
+        let staticItemsHeight: CGFloat = 160
+        var stackViewHeight: CGFloat = 0
+        let totalHeight = staticItemsHeight + stackViewHeight
+        
+        if countOfViews == 0 {
+            
+            stackViewHeight = 10
+            
+        } else {
+            
+            stackViewHeight = CGFloat(countOfViews * 8)
+        }
+        containerViewHeightContraint.constant = totalHeight
+    }
+    
+    // view.setneedslayout or view.layoutifneeded
+    
+    // MARK: Text field restraints
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
