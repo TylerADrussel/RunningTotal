@@ -22,7 +22,6 @@ class EntryController {
     static let shared = EntryController()
     
     func remove(entry: Entry) {
-        
         entry.managedObjectContext?.delete(entry)
         saveToPersistentStorage()
     }

@@ -43,7 +43,10 @@ class BucketCell: FoldingCell, UITextFieldDelegate {
     }
     
     func deleteItemButtonTapped(_ sender: Any) {
-        
+        print((sender as AnyObject).tag)
+        guard let tempTag = (sender as AnyObject).tag else { return }
+        let entry = bucket?.entries?.object(at: tempTag)
+        EntryController.shared.remove(entry: entry as! Entry)
         updateViews(withDeleteButton: true)
     }
     
@@ -208,23 +211,23 @@ class BucketCell: FoldingCell, UITextFieldDelegate {
     
     // MARK: Open cell height setting method
     
-    func setOpenCellHeight(stackView: UIStackView, containerViewHeightContraint: NSLayoutConstraint) {
-        
-        let countOfViews = stackView.arrangedSubviews.count
-        let staticItemsHeight: CGFloat = 160
-        var stackViewHeight: CGFloat = 0
-        let totalHeight = staticItemsHeight + stackViewHeight
-        
-        if countOfViews == 0 {
-            
-            stackViewHeight = 10
-            
-        } else {
-            
-            stackViewHeight = CGFloat(countOfViews * 8)
-        }
-        containerViewHeightContraint.constant = totalHeight
-    }
+//    func setOpenCellHeight(stackView: UIStackView, containerViewHeightContraint: NSLayoutConstraint) {
+//        
+//        let countOfViews = stackView.arrangedSubviews.count
+//        let staticItemsHeight: CGFloat = 160
+//        var stackViewHeight: CGFloat = 0
+//        let totalHeight = staticItemsHeight + stackViewHeight
+//        
+//        if countOfViews == 0 {
+//            
+//            stackViewHeight = 10
+//            
+//        } else {
+//            
+//            stackViewHeight = CGFloat(countOfViews * 8)
+//        }
+//        containerViewHeightContraint.constant = totalHeight
+//    }
     
     // view.setneedslayout or view.layoutifneeded
     

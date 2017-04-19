@@ -86,6 +86,7 @@ class BucketListTableViewController: UITableViewController, BucketCellDelegate {
     }
     
     func deleteItemButtonTapped(in cell: BucketCell) {
+        guard let _ = tableView.indexPath(for: cell) else { return }
     }
     
     func deleteAllEntriesButtonTapped(in cell: BucketCell) {
