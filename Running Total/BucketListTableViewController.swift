@@ -47,16 +47,19 @@ class BucketListTableViewController: UITableViewController, BucketCellDelegate {
         if cell.newEntryTitleTextField.text == "" || cell.newEntryAmountTextField.text == "" {
             return
         } else {
-        let bucket = BucketController.shared.buckets[indexPath.row]
-        guard let entryTitle = cell.newEntryTitleTextField.text,
-            let entryAmountString = cell.newEntryAmountTextField.text else { return }
-        
-        let itemAmountFloat = Float(entryAmountString) ?? 0
-        
-        EntryController.shared.create(entry: entryTitle, amount: itemAmountFloat, bucket: bucket)
-        cell.newEntryTitleTextField.text = ""
-        cell.newEntryAmountTextField.text = ""
-        tableView.reloadData()
+            let bucket = BucketController.shared.buckets[indexPath.row]
+            guard let entryTitle = cell.newEntryTitleTextField.text,
+                let entryAmountString = cell.newEntryAmountTextField.text else { return }
+            
+            let itemAmountFloat = Float(entryAmountString) ?? 0
+            
+            EntryController.shared.create(entry: entryTitle, amount: itemAmountFloat, bucket: bucket)
+            cell.newEntryTitleTextField.text = ""
+            cell.newEntryAmountTextField.text = ""
+            cell.updateViews(withDeleteButton: false)
+            cellHeights[indexPath.row] = cell.totalOpenHeight
+            tableView.beginUpdates()
+            tableView.endUpdates()
         }
     }
     
@@ -65,14 +68,21 @@ class BucketListTableViewController: UITableViewController, BucketCellDelegate {
     }
     
     func deleteItemButtonTapped(in cell: BucketCell) {
-        guard let _ = tableView.indexPath(for: cell) else { return }
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        cell.updateViews(withDeleteButton: true)
+        cellHeights[indexPath.row] = cell.totalOpenHeight
+        tableView.beginUpdates()
+        tableView.endUpdates()
     }
     
     func deleteAllEntriesButtonTapped(in cell: BucketCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         let bucket = BucketController.shared.buckets[indexPath.row]
         EntryController.shared.removeAll(bucket: bucket)
-        tableView.reloadData()
+        cell.updateViews(withDeleteButton: true)
+        cellHeights[indexPath.row] = cell.totalOpenHeight
+        tableView.beginUpdates()
+        tableView.endUpdates()
     }
     
     func cancelButtonTapped(in cell: BucketCell) {
@@ -119,7 +129,7 @@ class BucketListTableViewController: UITableViewController, BucketCellDelegate {
         var duration = 0.0
     // Open cell
         if cellHeights[indexPath.row] == kCloseCellHeight {
-            cellHeights[indexPath.row] = cell.openHeight + 16 // margins
+            cellHeights[indexPath.row] = cell.totalOpenHeight
             cell.selectedAnimation(true, animated: true, completion: nil)
             duration = 0.5
         } else {

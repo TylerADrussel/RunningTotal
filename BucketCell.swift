@@ -39,7 +39,6 @@ class BucketCell: FoldingCell, UITextFieldDelegate {
     
     func editListButtonTapped(_ sender: Any) {
         updateViews(withDeleteButton: true)
-        bucketCellDelegate?.editButtonTapped(in: self)
     }
     
     func deleteItemButtonTapped(_ sender: Any) {
@@ -47,11 +46,10 @@ class BucketCell: FoldingCell, UITextFieldDelegate {
         guard let tempTag = (sender as AnyObject).tag else { return }
         let entry = bucket?.entries?.object(at: tempTag)
         EntryController.shared.remove(entry: entry as! Entry)
-        updateViews(withDeleteButton: true)
+        bucketCellDelegate?.deleteItemButtonTapped(in: self)
     }
     
     func deleteAllEntriesButtonTapped(_ sender: Any) {
-        updateViews(withDeleteButton: false)
         bucketCellDelegate?.deleteAllEntriesButtonTapped(in: self)
     }
     
@@ -76,6 +74,10 @@ class BucketCell: FoldingCell, UITextFieldDelegate {
         }
     }
     
+    var totalOpenHeight: CGFloat {
+        return openHeight + 16
+    }
+    
     var openHeight: CGFloat {
         let countOfViews = entryStackView.arrangedSubviews.count
         let staticItemsHeight: CGFloat = 160
@@ -87,7 +89,7 @@ class BucketCell: FoldingCell, UITextFieldDelegate {
             
         } else {
             
-            stackViewHeight = CGFloat(countOfViews * 31)
+            stackViewHeight = CGFloat(countOfViews * 33)
         }
         return staticItemsHeight + stackViewHeight
     }
@@ -226,7 +228,6 @@ class BucketCell: FoldingCell, UITextFieldDelegate {
                 self.editListButton.backgroundColor = UIColor.darkGray
                 entryStackView.addArrangedSubview(self.editListButton)
                 editListButton.addTarget(self, action: #selector(editListButtonTapped(_:)), for: .touchUpInside)
-
             }
         }
         bucketCellOpenHeight.constant = openHeight
