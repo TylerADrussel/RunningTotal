@@ -28,28 +28,6 @@ class BucketListTableViewController: UITableViewController, BucketCellDelegate {
         tableView.reloadData()
     }    
     
-/* 
-     500 = Container height
-     40  = Cell Title View
-     8   = Bottom Space to Stack View
-     8   = Top Space to Superview
-     30  = Stackview height
-     8   = Bottom Space to Total Label
-     30  = Total Label height
-     8   = Bottom Space to stack view
-     8   = Top Space to Total Label
-     368 = Stackview height
-     8   = Bottom Space to Superview
-     
-     468 = Total of all views
-     48  = Total of all spaces
-     516 = Total of everything
-     
-     148 = Total without StackView height
-     
-     Should only have 4 spaces of 8 height
-*/
-    
     let kCloseCellHeight: CGFloat = 90
     let kOpenCellHeight: CGFloat = 520
     let kRowsCount = BucketController.shared.buckets.count
@@ -59,6 +37,7 @@ class BucketListTableViewController: UITableViewController, BucketCellDelegate {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
         createCellHeightsArray()
+        tableView.tableFooterView = UIView()
     }
     
     // MARK: BucketCellDelegate Methods
@@ -136,14 +115,11 @@ class BucketListTableViewController: UITableViewController, BucketCellDelegate {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        guard case let cell as FoldingCell = tableView.cellForRow(at: indexPath as IndexPath) else {
-            return
-        }
-        
+        guard let cell = tableView.cellForRow(at: indexPath) as? BucketCell else { return }
         var duration = 0.0
     // Open cell
         if cellHeights[indexPath.row] == kCloseCellHeight {
-            cellHeights[indexPath.row] = kOpenCellHeight
+            cellHeights[indexPath.row] = cell.openHeight + 16 // margins
             cell.selectedAnimation(true, animated: true, completion: nil)
             duration = 0.5
         } else {

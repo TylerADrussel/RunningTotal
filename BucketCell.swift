@@ -76,6 +76,22 @@ class BucketCell: FoldingCell, UITextFieldDelegate {
         }
     }
     
+    var openHeight: CGFloat {
+        let countOfViews = entryStackView.arrangedSubviews.count
+        let staticItemsHeight: CGFloat = 160
+        var stackViewHeight: CGFloat = 0
+        
+        if countOfViews == 0 {
+            
+            stackViewHeight = 8
+            
+        } else {
+            
+            stackViewHeight = CGFloat(countOfViews * 31)
+        }
+        return staticItemsHeight + stackViewHeight
+    }
+    
     // MARK: Update Views method. Creates normal view, or editing view.
     
     func updateViews(withDeleteButton: Bool) {
@@ -161,19 +177,26 @@ class BucketCell: FoldingCell, UITextFieldDelegate {
                     entryStackView.addArrangedSubview(stackView)
                 }
                 
-                self.cancelEditListButton = UIButton()
-                self.cancelEditListButton.setTitle("Cancel", for: .normal)
-                self.cancelEditListButton.backgroundColor = UIColor.darkGray
-                self.cancelEditListButton.addTarget(self, action: #selector(cancelEditListButtonTapped(_:)), for: .touchUpInside)
-                entryStackView.addArrangedSubview(self.cancelEditListButton)
-                
+                let buttonStackView = UIStackView()
                 var deleteAllEntriesButton: UIButton
 
                 deleteAllEntriesButton = UIButton()
                 deleteAllEntriesButton.setTitle("Delete All", for: .normal)
                 deleteAllEntriesButton.backgroundColor = UIColor.red
                 deleteAllEntriesButton.addTarget(self, action: #selector(deleteAllEntriesButtonTapped(_:)), for: .touchUpInside)
-                entryStackView.addArrangedSubview(deleteAllEntriesButton)
+               
+                cancelEditListButton = UIButton()
+                cancelEditListButton.setTitle("Cancel", for: .normal)
+                cancelEditListButton.backgroundColor = UIColor.darkGray
+                cancelEditListButton.addTarget(self, action: #selector(cancelEditListButtonTapped(_:)), for: .touchUpInside)
+                
+                buttonStackView.addArrangedSubview(deleteAllEntriesButton)
+                buttonStackView.addArrangedSubview(cancelEditListButton)
+                
+                let deleteAllButtonWidthConstraint = NSLayoutConstraint(item: deleteAllEntriesButton, attribute: .width, relatedBy: .equal, toItem: buttonStackView, attribute: .width, multiplier: 1/2, constant: 0)
+                buttonStackView.addConstraint(deleteAllButtonWidthConstraint)
+                
+                entryStackView.addArrangedSubview(buttonStackView)
                 
             } else {
                 
@@ -206,30 +229,8 @@ class BucketCell: FoldingCell, UITextFieldDelegate {
 
             }
         }
-//        setOpenCellHeight(stackView: entryStackView, containerViewHeightContraint: bucketCellOpenHeight)
+        bucketCellOpenHeight.constant = openHeight
     }
-    
-    // MARK: Open cell height setting method
-    
-//    func setOpenCellHeight(stackView: UIStackView, containerViewHeightContraint: NSLayoutConstraint) {
-//        
-//        let countOfViews = stackView.arrangedSubviews.count
-//        let staticItemsHeight: CGFloat = 160
-//        var stackViewHeight: CGFloat = 0
-//        let totalHeight = staticItemsHeight + stackViewHeight
-//        
-//        if countOfViews == 0 {
-//            
-//            stackViewHeight = 10
-//            
-//        } else {
-//            
-//            stackViewHeight = CGFloat(countOfViews * 8)
-//        }
-//        containerViewHeightContraint.constant = totalHeight
-//    }
-    
-    // view.setneedslayout or view.layoutifneeded
     
     // MARK: Text field restraints
     

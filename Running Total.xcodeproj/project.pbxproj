@@ -17,8 +17,6 @@
 		B4366D8B1E86C20E0014FA94 /* Running_TotalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4366D8A1E86C20E0014FA94 /* Running_TotalUITests.swift */; };
 		B4366D991E86C2250014FA94 /* Bucket.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4366D981E86C2250014FA94 /* Bucket.swift */; };
 		B4366D9B1E86C22E0014FA94 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4366D9A1E86C22E0014FA94 /* Entry.swift */; };
-		B4366DA01E86CAF80014FA94 /* BucketTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4366D9F1E86CAF80014FA94 /* BucketTableViewController.swift */; };
-		B4366DA21E86CB0B0014FA94 /* EntryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4366DA11E86CB0B0014FA94 /* EntryTableViewController.swift */; };
 		B4366DA41E86D1830014FA94 /* BucketController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4366DA31E86D1830014FA94 /* BucketController.swift */; };
 		B4366DA61E86EBE60014FA94 /* EntryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4366DA51E86EBE60014FA94 /* EntryController.swift */; };
 		B47ADADA1E8B457D008ABAB2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B47ADAD81E8B457D008ABAB2 /* Main.storyboard */; };
@@ -60,8 +58,6 @@
 		B4366D8C1E86C20E0014FA94 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B4366D981E86C2250014FA94 /* Bucket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bucket.swift; sourceTree = "<group>"; };
 		B4366D9A1E86C22E0014FA94 /* Entry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
-		B4366D9F1E86CAF80014FA94 /* BucketTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketTableViewController.swift; sourceTree = "<group>"; };
-		B4366DA11E86CB0B0014FA94 /* EntryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryTableViewController.swift; sourceTree = "<group>"; };
 		B4366DA31E86D1830014FA94 /* BucketController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketController.swift; sourceTree = "<group>"; };
 		B4366DA51E86EBE60014FA94 /* EntryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryController.swift; sourceTree = "<group>"; };
 		B47ADAD91E8B457D008ABAB2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -169,8 +165,6 @@
 			children = (
 				B41F03FA1E91961700961BE8 /* BucketCell.swift */,
 				B41F03EC1E91771900961BE8 /* BucketListTableViewController.swift */,
-				B4366D9F1E86CAF80014FA94 /* BucketTableViewController.swift */,
-				B4366DA11E86CB0B0014FA94 /* EntryTableViewController.swift */,
 			);
 			name = "View Controller";
 			sourceTree = "<group>";
@@ -329,12 +323,10 @@
 				B4366DA41E86D1830014FA94 /* BucketController.swift in Sources */,
 				B41F03ED1E91771900961BE8 /* BucketListTableViewController.swift in Sources */,
 				B4366DA61E86EBE60014FA94 /* EntryController.swift in Sources */,
-				B4366DA01E86CAF80014FA94 /* BucketTableViewController.swift in Sources */,
 				B47ADADD1E900110008ABAB2 /* Stack.swift in Sources */,
 				B47ADB321E90120B008ABAB2 /* Model.xcdatamodeld in Sources */,
 				B4366D991E86C2250014FA94 /* Bucket.swift in Sources */,
 				B41F03FB1E91961700961BE8 /* BucketCell.swift in Sources */,
-				B4366DA21E86CB0B0014FA94 /* EntryTableViewController.swift in Sources */,
 				B4366D6B1E86C20E0014FA94 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

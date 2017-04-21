@@ -15,10 +15,10 @@
         <scene sceneID="ap8-e1-BQ2">
             <objects>
                 <tableViewController id="vZU-qL-oSa" customClass="BucketListTableViewController" customModule="Running_Total" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="576" sectionHeaderHeight="28" sectionFooterHeight="28" id="SEY-5a-EGM">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="576" sectionHeaderHeight="28" sectionFooterHeight="28" id="SEY-5a-EGM">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="JH9-iY-rFx">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -55,7 +55,7 @@
                                 <rect key="frame" x="0.0" y="72" width="375" height="576"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gD7-Aw-byA" id="q0n-QF-kG0">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="575.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="576"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R1V-Uj-Q5f" customClass="RotatedView" customModule="Running_Total" customModuleProvider="target">
@@ -248,7 +248,6 @@
                                                     <constraints>
                                                         <constraint firstItem="jJs-1F-tNc" firstAttribute="top" secondItem="eaH-OJ-rJY" secondAttribute="top" constant="8" id="FjV-T4-GeN"/>
                                                         <constraint firstItem="jJs-1F-tNc" firstAttribute="leading" secondItem="eaH-OJ-rJY" secondAttribute="leading" constant="8" id="UAd-lD-pJo"/>
-                                                        <constraint firstAttribute="height" constant="368" id="iqr-hb-olW"/>
                                                         <constraint firstAttribute="bottom" secondItem="jJs-1F-tNc" secondAttribute="bottom" constant="8" placeholder="YES" id="scb-jT-14w"/>
                                                         <constraint firstAttribute="trailing" secondItem="jJs-1F-tNc" secondAttribute="trailing" constant="8" id="stD-ER-Oeg"/>
                                                     </constraints>
@@ -264,6 +263,7 @@
                                                 <constraint firstItem="eaH-OJ-rJY" firstAttribute="top" secondItem="V1h-Gi-hn3" secondAttribute="bottom" constant="8" id="XEe-kH-0SQ"/>
                                                 <constraint firstItem="eaH-OJ-rJY" firstAttribute="leading" secondItem="6cl-iD-dL7" secondAttribute="leading" id="Ze3-MK-RzN"/>
                                                 <constraint firstItem="Bju-bn-Pg5" firstAttribute="leading" secondItem="6cl-iD-dL7" secondAttribute="leading" id="fIl-8H-x4m"/>
+                                                <constraint firstAttribute="bottom" secondItem="eaH-OJ-rJY" secondAttribute="bottom" constant="8" id="fei-ma-7rH"/>
                                                 <constraint firstItem="V1h-Gi-hn3" firstAttribute="leading" secondItem="6cl-iD-dL7" secondAttribute="leading" id="jxm-Bw-jJz"/>
                                                 <constraint firstAttribute="trailing" secondItem="eaH-OJ-rJY" secondAttribute="trailing" id="lIX-cZ-2Y9"/>
                                                 <constraint firstItem="mUH-aB-a0D" firstAttribute="leading" secondItem="6cl-iD-dL7" secondAttribute="leading" constant="8" id="lPc-0F-8nv"/>
@@ -286,11 +286,11 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="itemCount">
-                                        <integer key="value" value="4"/>
-                                    </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="backViewColor">
                                         <color key="value" red="0.96862745100000003" green="0.93725490199999995" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="itemCount">
+                                        <integer key="value" value="4"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
