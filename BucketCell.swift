@@ -19,10 +19,12 @@ class BucketCell: FoldingCell, UITextFieldDelegate {
     @IBOutlet weak var bucketTotalLabelClosedCell: UILabel!
     @IBOutlet weak var bucketDatetimeLabelClosedCell: UILabel!
     @IBOutlet weak var bucketItemCountLabelClosedCell: UILabel!
+    @IBOutlet weak var bucketCellColorLabaelClosedCell: UIView!
     
     // Mark: Open Cell Outlets
     @IBOutlet weak var bucketTitleLabelOpenCell: UILabel!
     @IBOutlet weak var bucketTotalLabelOpenCell: UILabel!
+    @IBOutlet weak var bucketCellColorLabelOpenCell: UIView!
     @IBOutlet weak var newEntryTitleTextField: UITextField!
     @IBOutlet weak var newEntryAmountTextField: UITextField!
     @IBOutlet weak var entryStackViewEmbeddedView: UIView!
@@ -93,6 +95,8 @@ class BucketCell: FoldingCell, UITextFieldDelegate {
         }
         return staticItemsHeight + stackViewHeight
     }
+
+        let colorsDictionary : [String:UIColor] = ["blue":UIColor.blue, "brown":UIColor.brown, "cyan":UIColor.cyan, "grean":UIColor.green, "magenta":UIColor.magenta, "orange":UIColor.orange, "purple":UIColor.purple, "red":UIColor.red, "yellow":UIColor.yellow]
     
     // MARK: Update Views method. Creates normal view, or editing view.
     
@@ -102,6 +106,9 @@ class BucketCell: FoldingCell, UITextFieldDelegate {
         self.newEntryAmountTextField.delegate = self        
         self.bucketTitleLabelClosedCell.text = bucket.bucketTitle
         self.bucketTitleLabelOpenCell.text = bucket.bucketTitle
+        guard let bucketColorString = bucket.bucketColor else { return }
+        self.bucketCellColorLabaelClosedCell.backgroundColor = colorsDictionary[bucketColorString]
+        self.bucketCellColorLabelOpenCell.backgroundColor = colorsDictionary[bucketColorString]
         self.bucketDatetimeLabelClosedCell.text = "\(bucketDate ?? "No date")"
         self.bucketClosedIndex.text = "\(String(describing: BucketController.shared.buckets.index(of: bucket)))"
         self.bucketOpenIndex.text = "\(String(describing: BucketController.shared.buckets.index(of: bucket)))"

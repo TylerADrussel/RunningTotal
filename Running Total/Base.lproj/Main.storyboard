@@ -294,6 +294,8 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
+                                    <outlet property="bucketCellColorLabaelClosedCell" destination="EWK-WB-pGH" id="akA-Lf-Fmy"/>
+                                    <outlet property="bucketCellColorLabelOpenCell" destination="u9b-6B-TUy" id="xzW-MR-7dH"/>
                                     <outlet property="bucketCellOpenHeight" destination="1vc-Bd-Gbv" id="uNT-W2-SMR"/>
                                     <outlet property="bucketClosedIndex" destination="ejI-5F-Tik" id="sHd-H2-GVu"/>
                                     <outlet property="bucketDatetimeLabelClosedCell" destination="9y7-ih-gIr" id="dbo-vq-KL1"/>

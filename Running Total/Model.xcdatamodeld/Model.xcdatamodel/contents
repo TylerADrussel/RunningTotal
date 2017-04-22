@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16D32" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16E195" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Bucket" representedClassName="Bucket" syncable="YES" codeGenerationType="class">
+        <attribute name="bucketColor" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="bucketTimestamp" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="bucketTitle" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="entries" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Entry" inverseName="bucket" inverseEntity="Entry" syncable="YES"/>
@@ -12,7 +13,7 @@
         <relationship name="bucket" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Bucket" inverseName="entries" inverseEntity="Bucket" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Bucket" positionX="-63" positionY="-18" width="128" height="90"/>
+        <element name="Bucket" positionX="-63" positionY="-18" width="128" height="105"/>
         <element name="Entry" positionX="196" positionY="-9" width="128" height="103"/>
     </elements>
 </model>

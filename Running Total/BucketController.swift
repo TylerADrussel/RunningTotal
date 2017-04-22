@@ -24,8 +24,8 @@ class BucketController {
         }
     }
     
-    func create(bucket bucketTitle: String, timestamp: Date = Date()) {
-        let _ = Bucket(bucketTitle: bucketTitle)
+    func create(bucket bucketTitle: String, timestamp: Date = Date(), bucketColor: String) {
+        let _ = Bucket(bucketTitle: bucketTitle, bucketColor: bucketColor)
         saveToPersistentStorage()
     }
     

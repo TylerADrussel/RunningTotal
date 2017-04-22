@@ -13,13 +13,15 @@ extension Bucket {
     
     static let bucketTitleKey = "bucketTitle"
     static let bucketTimestampKey = "bucketTimestamp"
+    static let bucketColorKey = "bucketColor"
     
-    convenience init(bucketTitle: String, bucketTimestamp: Date = Date(), context: NSManagedObjectContext = CoreDataStack.context) {
+    convenience init(bucketTitle: String, bucketTimestamp: Date = Date(),bucketColor: String, context: NSManagedObjectContext = CoreDataStack.context) {
         
         self.init(context: context)
         
         self.bucketTitle = bucketTitle
         self.bucketTimestamp = bucketTimestamp as NSDate
+        self.bucketColor = bucketColor
 
     }
 }

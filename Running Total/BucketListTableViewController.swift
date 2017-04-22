@@ -23,7 +23,10 @@ class BucketListTableViewController: UITableViewController, BucketCellDelegate {
     @IBAction func createNewBucketTapped(_ sender: Any) {
         
         guard let bucketName = newBucketTitleTextField.text, !bucketName.isEmpty else { return }
-        BucketController.shared.create(bucket: bucketName)
+        let colorsArray = ["blue", "brown", "cyan", "green", "magenta", "orange", "purple", "red", "yellow"]
+        let bucketColorUIColor = Int(arc4random_uniform(UInt32(colorsArray.count)))
+        let bucketColorString = colorsArray[bucketColorUIColor]
+        BucketController.shared.create(bucket: bucketName, bucketColor: bucketColorString)
         newBucketTitleTextField.text = ""
         tableView.reloadData()
     }    
