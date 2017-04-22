@@ -96,7 +96,7 @@ class BucketCell: FoldingCell, UITextFieldDelegate {
         return staticItemsHeight + stackViewHeight
     }
 
-        let colorsDictionary : [String:UIColor] = ["blue":UIColor.blue, "brown":UIColor.brown, "cyan":UIColor.cyan, "green":UIColor.green, "magenta":UIColor.magenta, "orange":UIColor.orange, "purple":UIColor.purple, "red":UIColor.red, "yellow":UIColor.yellow]
+        let colorsDictionary : [String:String] = ["Pale Aqua":"B7D3F2", "Maximum Blue Purple":"AFAFDC", "Medium Purple":"8A84E2", "Light Cobalt Blue":"84AFE6", "Aero":"79BEEE", "Steel Blue":"457EAC", "Bedazzled Blue":"2D5D7B", "Salmon Pink":"FFA8A9", "Melon":"FBC2B5", "Magenta Haze":"A14A76", "Lapis Lazuli":"2660A4", "Ceil":"8D91C7", "Rhythm":"6E75A8", "Light Blue":"B0DAF1", "Dark Purple":"3E1929", "Fuzzy Wuzzy":"C17786", "Dark Vanilla":"D3B99F", "Wild Blue Yonder":"9AADBF", "Cerulean Frost":"6D98BA"]
     
     // MARK: Update Views method. Creates normal view, or editing view.
     
@@ -106,9 +106,14 @@ class BucketCell: FoldingCell, UITextFieldDelegate {
         self.newEntryAmountTextField.delegate = self        
         self.bucketTitleLabelClosedCell.text = bucket.bucketTitle
         self.bucketTitleLabelOpenCell.text = bucket.bucketTitle
+        
         guard let bucketColorString = bucket.bucketColor else { return }
-        self.bucketCellColorLabaelClosedCell.backgroundColor = colorsDictionary[bucketColorString]
-        self.bucketCellColorLabelOpenCell.backgroundColor = colorsDictionary[bucketColorString]
+        let colorHex = colorsDictionary[bucketColorString]?.colorFromHex()
+        let colorHexAlpha = colorHex?.withAlphaComponent(0.5)
+        self.bucketCellColorLabaelClosedCell.backgroundColor = colorHex
+        self.bucketCellColorLabelOpenCell.backgroundColor = colorHexAlpha
+        self.bucketTitleLabelClosedCell.layer.backgroundColor = colorHexAlpha?.cgColor
+ 
         self.bucketDatetimeLabelClosedCell.text = "Created: \(bucketDate ?? "No date")"
         self.bucketClosedIndex.text = "\(String(describing: BucketController.shared.buckets.index(of: bucket)))"
         self.bucketOpenIndex.text = "\(String(describing: BucketController.shared.buckets.index(of: bucket)))"
@@ -280,6 +285,29 @@ extension BucketCell {
     
     @IBAction func buttonHandler(_ sender: AnyObject) {
         print("tap")
+    }
+}
+
+extension String {
+    
+    func colorFromHex() -> UIColor {
+        var hexInt: UInt32 = 0
+        // Create scanner
+        let scanner: Scanner = Scanner(string: self)
+        // Tell scanner to skip the # character
+        scanner.charactersToBeSkipped = NSCharacterSet(charactersIn: "#") as CharacterSet
+        // Scan hex value
+        scanner.scanHexInt32(&hexInt)
+        
+        // Convert hex string to an integer
+        let red = CGFloat((hexInt & 0xff0000) >> 16) / 255.0
+        let green = CGFloat((hexInt & 0xff00) >> 8) / 255.0
+        let blue = CGFloat((hexInt & 0xff) >> 0) / 255.0
+        let alpha = CGFloat(1.0)
+        
+        // Create color object, specifying alpha as well
+        let color = UIColor(red: red, green: green, blue: blue, alpha: alpha)
+        return color
     }
 }
 

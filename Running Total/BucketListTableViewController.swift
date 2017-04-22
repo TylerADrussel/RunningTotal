@@ -23,7 +23,7 @@ class BucketListTableViewController: UITableViewController, BucketCellDelegate {
     @IBAction func createNewBucketTapped(_ sender: Any) {
         
         guard let bucketName = newBucketTitleTextField.text, !bucketName.isEmpty else { return }
-        let colorsArray = ["blue", "brown", "cyan", "green", "magenta", "orange", "purple", "red", "yellow"]
+        let colorsArray = ["Pale Aqua", "Maximum Blue Purple", "Medium Purple", "Light Cobalt Blue", "Aero", "Steel Blue", "Bedazzled Blue", "Salmon Pink", "Melon", "Magenta Haze", "Lapis Lazuli", "Ceil", "Rhythm", "Light Blue", "Dark Purple", "Fuzzy Wuzzy", "Dark Vanilla", "Wild Blue Yonder", "Cerulean Frost"]
         let bucketColorUIColor = Int(arc4random_uniform(UInt32(colorsArray.count)))
         let bucketColorString = colorsArray[bucketColorUIColor]
         BucketController.shared.create(bucket: bucketName, bucketColor: bucketColorString)

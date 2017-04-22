@@ -11,7 +11,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Running Totals-->
+        <!--Running Total-->
         <scene sceneID="ap8-e1-BQ2">
             <objects>
                 <tableViewController id="vZU-qL-oSa" customClass="BucketListTableViewController" customModule="Running_Total" customModuleProvider="target" sceneMemberID="viewController">
@@ -87,31 +87,37 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="351" height="40"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bucket Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="07A-C0-eqD">
-                                                                            <rect key="frame" x="0.0" y="10" width="174.5" height="20.5"/>
-                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="174.5" height="40"/>
+                                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Datetime" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9y7-ih-gIr">
-                                                                            <rect key="frame" x="176.5" y="10" width="174.5" height="20.5"/>
-                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                            <rect key="frame" x="176.5" y="0.0" width="174.5" height="40"/>
+                                                                            <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="15"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                     </subviews>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="bottom" secondItem="07A-C0-eqD" secondAttribute="bottom" id="Zjn-lK-2vI"/>
+                                                                        <constraint firstItem="07A-C0-eqD" firstAttribute="top" secondItem="Y6H-RC-gVc" secondAttribute="top" id="l28-m1-hdK"/>
+                                                                        <constraint firstItem="9y7-ih-gIr" firstAttribute="top" secondItem="Y6H-RC-gVc" secondAttribute="top" id="o4T-qw-AIo"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="9y7-ih-gIr" secondAttribute="bottom" id="ybM-pb-GXk"/>
+                                                                    </constraints>
                                                                 </stackView>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="q7j-Bb-Z1Y">
                                                                     <rect key="frame" x="0.0" y="40" width="351" height="40"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nDy-K5-eaq">
-                                                                            <rect key="frame" x="0.0" y="10" width="174.5" height="20.5"/>
-                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                            <rect key="frame" x="0.0" y="8" width="174.5" height="24"/>
+                                                                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="20"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Count" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qFk-If-jEW">
-                                                                            <rect key="frame" x="176.5" y="10" width="174.5" height="20.5"/>
-                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                            <rect key="frame" x="176.5" y="8" width="174.5" height="24"/>
+                                                                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="20"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
@@ -303,7 +309,7 @@
                             <outlet property="delegate" destination="vZU-qL-oSa" id="7Ds-Tg-YY8"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Running Totals" id="6i1-0G-IGt"/>
+                    <navigationItem key="navigationItem" title="Running Total" id="6i1-0G-IGt"/>
                     <connections>
                         <outlet property="newBucketTitleTextField" destination="WRT-8C-a28" id="OZP-bA-a9o"/>
                     </connections>
@@ -328,7 +334,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pkl-Gg-Wa1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="447.19999999999999" y="-860.41979010494754"/>
+            <point key="canvasLocation" x="663" y="-860"/>
         </scene>
     </scenes>
 </document>
