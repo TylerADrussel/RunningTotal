@@ -96,7 +96,7 @@ class BucketCell: FoldingCell, UITextFieldDelegate {
         return staticItemsHeight + stackViewHeight
     }
 
-        let colorsDictionary : [String:UIColor] = ["blue":UIColor.blue, "brown":UIColor.brown, "cyan":UIColor.cyan, "grean":UIColor.green, "magenta":UIColor.magenta, "orange":UIColor.orange, "purple":UIColor.purple, "red":UIColor.red, "yellow":UIColor.yellow]
+        let colorsDictionary : [String:UIColor] = ["blue":UIColor.blue, "brown":UIColor.brown, "cyan":UIColor.cyan, "green":UIColor.green, "magenta":UIColor.magenta, "orange":UIColor.orange, "purple":UIColor.purple, "red":UIColor.red, "yellow":UIColor.yellow]
     
     // MARK: Update Views method. Creates normal view, or editing view.
     
@@ -109,7 +109,7 @@ class BucketCell: FoldingCell, UITextFieldDelegate {
         guard let bucketColorString = bucket.bucketColor else { return }
         self.bucketCellColorLabaelClosedCell.backgroundColor = colorsDictionary[bucketColorString]
         self.bucketCellColorLabelOpenCell.backgroundColor = colorsDictionary[bucketColorString]
-        self.bucketDatetimeLabelClosedCell.text = "\(bucketDate ?? "No date")"
+        self.bucketDatetimeLabelClosedCell.text = "Created: \(bucketDate ?? "No date")"
         self.bucketClosedIndex.text = "\(String(describing: BucketController.shared.buckets.index(of: bucket)))"
         self.bucketOpenIndex.text = "\(String(describing: BucketController.shared.buckets.index(of: bucket)))"
         
@@ -119,8 +119,8 @@ class BucketCell: FoldingCell, UITextFieldDelegate {
         }
         
         if bucket.entries?.count == 0 {
-            self.bucketTotalLabelClosedCell.text = "0"
-            self.bucketItemCountLabelClosedCell.text = "None"
+            self.bucketTotalLabelClosedCell.text = "Running Total: 0"
+            self.bucketItemCountLabelClosedCell.text = "No Items"
             self.bucketTotalLabelOpenCell.text = "Please add an item"
             
         } else {
@@ -128,8 +128,8 @@ class BucketCell: FoldingCell, UITextFieldDelegate {
             let entryCount = bucket.entries!.count
             let entriesSet = bucket.entries!
             let total = BucketController.shared.total(bucket: bucket)
-            self.bucketTotalLabelClosedCell.text = "\(total)"
-            self.bucketItemCountLabelClosedCell.text = "\(entryCount)"
+            self.bucketTotalLabelClosedCell.text = "Running Total: \(total)"
+            self.bucketItemCountLabelClosedCell.text = "Items: \(entryCount)"
             self.bucketTotalLabelOpenCell.text = "Running Total: \(total)"
             
             let entryStackViewTitleStackView = UIStackView()
@@ -140,7 +140,7 @@ class BucketCell: FoldingCell, UITextFieldDelegate {
             entryStackViewTitleStackView.addArrangedSubview(entryStackViewTitleLabel)
             entryStackViewTitleStackView.addArrangedSubview(entryStackViewAmountLabel)
             
-            let labelAmountHeaderWidthConstraint = NSLayoutConstraint(item: entryStackViewAmountLabel, attribute: .width, relatedBy: .equal, toItem: entryStackViewTitleStackView, attribute: .width, multiplier: 1/6, constant: 0)
+            let labelAmountHeaderWidthConstraint = NSLayoutConstraint(item: entryStackViewAmountLabel, attribute: .width, relatedBy: .equal, toItem: entryStackViewTitleStackView, attribute: .width, multiplier: 1/5, constant: 0)
             entryStackViewTitleStackView.addConstraint(labelAmountHeaderWidthConstraint)
             
             self.entryStackView.addArrangedSubview(entryStackViewTitleStackView)
@@ -180,7 +180,7 @@ class BucketCell: FoldingCell, UITextFieldDelegate {
                     stackView.addArrangedSubview(labelTitle)
                     stackView.addArrangedSubview(labelAmount)
                     labelAmount.translatesAutoresizingMaskIntoConstraints = false
-                    let labelAmountWidthConstraint = NSLayoutConstraint(item: labelAmount, attribute: .width, relatedBy: .equal, toItem: stackView, attribute: .width, multiplier: 1/6, constant: 0)
+                    let labelAmountWidthConstraint = NSLayoutConstraint(item: labelAmount, attribute: .width, relatedBy: .equal, toItem: stackView, attribute: .width, multiplier: 1/5, constant: 0)
                     stackView.addConstraint(labelAmountWidthConstraint)
                     stackView.axis = .horizontal
                     entryStackView.addArrangedSubview(stackView)

@@ -28,8 +28,12 @@ class BucketListTableViewController: UITableViewController, BucketCellDelegate {
         let bucketColorString = colorsArray[bucketColorUIColor]
         BucketController.shared.create(bucket: bucketName, bucketColor: bucketColorString)
         newBucketTitleTextField.text = ""
+//        tableView.beginUpdates()
+//        let indexPath = NSIndexPath(row: BucketController.shared.buckets.count, section: 0)
+//        tableView.insertRows(at: [indexPath as IndexPath], with: .automatic)
+//        tableView.endUpdates()
         tableView.reloadData()
-    }    
+    }
     
     let kCloseCellHeight: CGFloat = 90
     let kOpenCellHeight: CGFloat = 520
