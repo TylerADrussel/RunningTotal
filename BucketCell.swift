@@ -114,7 +114,7 @@ class BucketCell: FoldingCell, UITextFieldDelegate {
         self.bucketCellColorLabelOpenCell.backgroundColor = colorHexAlpha
         self.bucketTitleLabelClosedCell.layer.backgroundColor = colorHexAlpha?.cgColor
  
-        self.bucketDatetimeLabelClosedCell.text = "Created: \(bucketDate ?? "No date")"
+        self.bucketDatetimeLabelClosedCell.text = "\(bucketDate ?? "No date")"
         self.bucketClosedIndex.text = "\(String(describing: BucketController.shared.buckets.index(of: bucket)))"
         self.bucketOpenIndex.text = "\(String(describing: BucketController.shared.buckets.index(of: bucket)))"
         
@@ -133,8 +133,8 @@ class BucketCell: FoldingCell, UITextFieldDelegate {
             let entryCount = bucket.entries!.count
             let entriesSet = bucket.entries!
             let total = BucketController.shared.total(bucket: bucket)
-            self.bucketTotalLabelClosedCell.text = "Running Total: \(total)"
-            self.bucketItemCountLabelClosedCell.text = "Items: \(entryCount)"
+            self.bucketTotalLabelClosedCell.text = "Total: \(total)"
+            self.bucketItemCountLabelClosedCell.text = "\(entryCount) items"
             self.bucketTotalLabelOpenCell.text = "Running Total: \(total)"
             
             let entryStackViewTitleStackView = UIStackView()
@@ -165,6 +165,7 @@ class BucketCell: FoldingCell, UITextFieldDelegate {
                     let labelTitle = UILabel()
                     let labelAmount = UILabel()
                     let deleteButton = UIButton()
+                    let spacerLabel = UILabel()
                     
                     guard let entryIndex = entriesArray.index(of: entry) else { return }
                     
@@ -176,6 +177,10 @@ class BucketCell: FoldingCell, UITextFieldDelegate {
                     stackView.addArrangedSubview(deleteButton)
                     let deleteButtonConstraint = NSLayoutConstraint(item: deleteButton, attribute: .width, relatedBy: .equal, toItem: stackView, attribute: .width, multiplier: 1/6, constant: 0)
                     stackView.addConstraint(deleteButtonConstraint)
+                    
+                    stackView.addArrangedSubview(spacerLabel)
+                    let spacerLabelConstraint = NSLayoutConstraint(item: spacerLabel, attribute: .width, relatedBy: .equal, toItem: stackView, attribute: .width, multiplier: 1/50, constant: 0)
+                    stackView.addConstraint(spacerLabelConstraint)
                     
                     labelTitle.text = entry.title
                     labelTitle.adjustsFontSizeToFitWidth = true
